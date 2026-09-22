@@ -33,11 +33,13 @@ jobs:
       - name: Testy
         run: npm test
 
+      # Zostava používa relatívne cesty, takže funguje v koreni domény
+      # aj v podadresári projektovej stránky bez ďalšieho nastavovania.
       - name: Zostavenie
         run: npm run build
-        env:
-          # Projektová stránka beží v podadresári s názvom repozitára.
-          BASE_PATH: /${{ github.event.repository.name }}/
+
+      - name: Zostavenie jednosúborovej prílohy
+        run: npm run build:single
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

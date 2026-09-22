@@ -21,6 +21,8 @@ npm run build      # produkčná zostava do dist/
 npm run preview    # náhľad produkčnej zostavy
 npm test           # testy výpočtového jadra
 npm run typecheck  # kontrola typov
+
+npm run build:single   # jeden samostatný HTML súbor do dist-single/
 ```
 
 Node.js 20 alebo novší.
@@ -109,24 +111,49 @@ istý výpočet u ktoréhokoľvek čitateľa.
 
 ## Nasadenie
 
+Zostava používa **relatívne cesty**, takže funguje v koreni domény aj
+v ľubovoľnom podadresári bez ďalšieho nastavovania. Smerovanie ide cez fragment
+adresy (`#/vysledky`), takže nevyžaduje serverové presmerovanie a obnovenie
+stránky funguje aj na statickom hostingu.
+
 ### GitHub Pages
 
-Workflow `.github/workflows/deploy.yml` zostaví a nasadí aplikáciu pri každom pushi do
-hlavnej vetvy. V nastaveniach repozitára stačí prepnúť **Settings → Pages → Source**
-na *GitHub Actions*.
+Workflow `.github/workflows/deploy.yml` zostaví a nasadí aplikáciu pri každom
+pushi do hlavnej vetvy. V nastaveniach repozitára prepnite
+**Settings → Pages → Source** na *GitHub Actions*.
 
-`vite.config.ts` má predvolený `base: '/project_diplomovka/'`, čo zodpovedá adrese
-projektovej stránky. Pri nasadení do koreňa domény zostavte s `BASE_PATH=/`.
-
-### Statický hosting alebo príloha na dátovom nosiči
+### Ľubovoľný statický hosting
 
 ```bash
-BASE_PATH=./ npm run build
+npm run build      # výstup v dist/
 ```
 
-Obsah priečinka `dist/` potom funguje aj po otvorení z disku bez servera. Písma sú
-súčasťou zostavy, takže aplikácia nevyžaduje pripojenie na internet — to je podstatné
-pre obhajobu aj pre archiváciu.
+Obsah `dist/` nahrajte kamkoľvek. Netreba nič konfigurovať.
+
+### Príloha práce na dátovom nosiči
+
+```bash
+npm run build:single   # výstup v dist-single/index.html
+```
+
+Vznikne **jeden samostatný HTML súbor** (približne 470 kB), ktorý má v sebe
+vložený JavaScript, štýly aj písma. Otvorí sa dvojklikom, funguje bez servera
+aj bez internetu — to je forma vhodná na priloženie k práci.
+
+Dôvod, prečo na to existuje osobitný režim: bežná zostava je ES modul a
+prehliadače odmietajú načítať moduly z adresy `file://`, pretože sa vždy
+sťahujú cez CORS a súbor na disku nemá pôvod, voči ktorému by sa to dalo
+overiť. Jednosúborový režim preto zostaví klasický skript. Zostava sa navyše
+sama kontroluje — ak by v HTML zostal odkaz na externý súbor, build zlyhá.
+
+### Absolútne cesty
+
+Ak ich naozaj potrebujete (napríklad za reverznou proxy), nastavte
+`BASE_PATH`:
+
+```bash
+BASE_PATH=/moja/cesta/ npm run build
+```
 
 ---
 
