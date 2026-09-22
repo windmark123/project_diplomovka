@@ -28,7 +28,7 @@ export function resultsCsv(state: AppState, a: Analysis): string {
   const lines: string[] = [];
   const alloc = normalizeAllocation(a.allocation);
 
-  lines.push(row('Horizont — výstup modelu'));
+  lines.push(row('Štvrtý pilier — výstup modelu'));
   lines.push(row('Vygenerované', new Date().toISOString().slice(0, 10)));
   lines.push(row('Parametre tried aktív', `${DATA_VINTAGE.period} (${DATA_VINTAGE.currency})`));
   lines.push(row('Právne parametre overené', LEGAL_VINTAGE.verifiedOn));
@@ -38,7 +38,7 @@ export function resultsCsv(state: AppState, a: Analysis): string {
   lines.push(row('Rizikový profil', a.profile.profile.name));
   lines.push(row('Rizikové skóre', n(a.profile.score, 0)));
   lines.push(row('Mesačný vklad (EUR)', n(state.monthly, 0)));
-  lines.push(row('Horizont (rokov)', n(state.horizon, 0)));
+  lines.push(row('Investičný horizont (rokov)', n(state.horizon, 0)));
   lines.push(row('Hrubá mzda (EUR)', n(wageBand(state.wageBandId).gross, 0)));
   lines.push(row('Inflácia p. a.', n(MACRO.inflation.value * 100) + ' %'));
   lines.push(row('Glide path', state.glidepath.enabled ? 'zapnutý' : 'vypnutý'));

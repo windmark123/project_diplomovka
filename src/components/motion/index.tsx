@@ -112,7 +112,7 @@ export function Reveal({ children, index = 0, className, as = 'div', style, id }
     <Tag
       id={id}
       ref={ref as RefObject<never>}
-      className={['hz-reveal', className].filter(Boolean).join(' ')}
+      className={['sp-reveal', className].filter(Boolean).join(' ')}
       style={{ ['--reveal-index' as string]: index, ...style }}
     >
       {children}

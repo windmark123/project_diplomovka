@@ -12,25 +12,31 @@ export function Nav({ route, navigate }: Props) {
   const isNight = state.theme === 'night';
 
   return (
-    <header className="hz-nav hz-no-print">
-      <div className="hz-nav__inner">
+    <header className="sp-nav sp-no-print">
+      <div className="sp-nav__inner">
         <a
-          className="hz-brand"
+          className="sp-brand"
           href="#/"
           onClick={(e) => {
             e.preventDefault();
             navigate('/');
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="10" cy="10" r="9" fill="none" stroke="var(--accent)" strokeWidth="1.5" />
-            <path d="M1.6 12.5h16.8" stroke="var(--text-strong)" strokeWidth="1.5" />
-            <circle cx="10" cy="6" r="2.4" fill="var(--accent)" />
+          <svg width="22" height="20" viewBox="0 0 22 20" aria-hidden="true">
+            {/* Tri existujúce piliere sú obrysové, štvrtý — ten, ktorý si
+                sporiteľ postaví sám — je plný a v akcentnej farbe. Všetky
+                štyri sú rovnako vysoké zámerne: vyšší štvrtý stĺpik by bol
+                tvrdenie, že vlastné portfólio je najväčšie, a to je záver
+                výpočtu, nie predpoklad značky. */}
+            <rect x="1" y="5" width="3.4" height="13" rx="1.2" fill="none" stroke="var(--text-strong)" strokeWidth="1.4" />
+            <rect x="6.5" y="5" width="3.4" height="13" rx="1.2" fill="none" stroke="var(--text-strong)" strokeWidth="1.4" />
+            <rect x="12" y="5" width="3.4" height="13" rx="1.2" fill="none" stroke="var(--text-strong)" strokeWidth="1.4" />
+            <rect x="17.5" y="5" width="3.4" height="13" rx="1.2" fill="var(--accent)" />
           </svg>
-          Horizont
+          Štvrtý pilier
         </a>
 
-        <nav className="hz-nav__links" aria-label="Hlavná navigácia">
+        <nav className="sp-nav__links" aria-label="Hlavná navigácia">
           {ROUTES.map((r) => (
             <a
               key={r.path}
@@ -49,15 +55,15 @@ export function Nav({ route, navigate }: Props) {
 
         {/* Akcie stoja mimo rolovateľného zoznamu odkazov, aby zostali
             dostupné aj vtedy, keď sa odkazy na úzkej obrazovke rolujú. */}
-        <div className="hz-nav__actions">
+        <div className="sp-nav__actions">
           <button
             type="button"
-            className="hz-icon-btn"
+            className="sp-icon-btn"
             aria-pressed={isNight}
             title={isNight ? 'Prepnúť na svetlý režim' : 'Prepnúť na tmavý režim'}
             onClick={() => set({ theme: isNight ? 'day' : 'night' })}
           >
-            <span className="hz-sr">{isNight ? 'Svetlý režim' : 'Tmavý režim'}</span>
+            <span className="sp-sr">{isNight ? 'Svetlý režim' : 'Tmavý režim'}</span>
             {isNight ? (
               <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <circle cx="8" cy="8" r="3.2" />
@@ -74,7 +80,7 @@ export function Nav({ route, navigate }: Props) {
             <Button
               variant="signal"
               size="sm"
-              className="hz-nav__cta"
+              className="sp-nav__cta"
               onClick={() => navigate('/nastroj')}
             >
               Zistiť svoj profil

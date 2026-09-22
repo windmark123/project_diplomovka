@@ -33,7 +33,7 @@ function Formula({ children, note }: { children: string; note?: string }) {
         {children}
       </code>
       {note && (
-        <p className="hz-micro" style={{ margin: 0 }}>
+        <p className="sp-micro" style={{ margin: 0 }}>
           {note}
         </p>
       )}
@@ -52,18 +52,18 @@ function Step({
 }) {
   return (
     <Panel span={4} padded>
-      <div className="hz-row" style={{ alignItems: 'baseline', gap: 'var(--s-5)' }}>
+      <div className="sp-row" style={{ alignItems: 'baseline', gap: 'var(--s-5)' }}>
         <span
-          className="hz-num"
+          className="sp-num"
           style={{ fontSize: 'var(--fs-head)', color: 'var(--text-accent)', fontWeight: 500 }}
         >
           {n}
         </span>
-        <h3 className="hz-subhead" style={{ margin: 0 }}>
+        <h3 className="sp-subhead" style={{ margin: 0 }}>
           {title}
         </h3>
       </div>
-      <div className="hz-prose" style={{ marginTop: 'var(--s-6)' }}>
+      <div className="sp-prose" style={{ marginTop: 'var(--s-6)' }}>
         {children}
       </div>
     </Panel>
@@ -72,20 +72,20 @@ function Step({
 
 export function Methodology() {
   return (
-    <div className="hz-page hz-page--app hz-section--tight">
+    <div className="sp-page sp-page--app sp-section--tight">
       <section>
         <Label>Metodika</Label>
-        <h1 className="hz-title" style={{ margin: 'var(--s-5) 0 var(--s-7)', maxWidth: '22ch' }}>
+        <h1 className="sp-title" style={{ margin: 'var(--s-5) 0 var(--s-7)', maxWidth: '22ch' }}>
           Ako model počíta a čo pritom predpokladá
         </h1>
-        <p className="hz-lead">
+        <p className="sp-lead">
           Každý krok je vypísaný aj so vzorcom. Model nepracuje so žiadnym skrytým
           parametrom — všetko, čo ovplyvňuje výsledok, je na tejto stránke alebo
           v prehľade dát.
         </p>
       </section>
 
-      <div className="hz-bento" style={{ marginTop: 'var(--s-10)' }}>
+      <div className="sp-bento" style={{ marginTop: 'var(--s-10)' }}>
         <Step n="01" title="Profilácia investora">
           <p>
             Dotazník má {QUESTION_COUNT} otázok v {AREAS.length} oblastiach. Každá otázka
@@ -117,7 +117,7 @@ ${AREAS.filter((a) => a.weight > 0)
               rezervu, býva nútený predať v najhoršom možnom čase.
             </li>
             <li>
-              Horizont pod 15 rokov obmedzí profil najviac na rastový, pod 10 rokov na
+              Investičný horizont pod 15 rokov obmedzí profil najviac na rastový, pod 10 rokov na
               vyvážený. Krátky horizont nedáva akciovej zložke čas odpracovať pokles.
             </li>
           </ul>
@@ -252,7 +252,7 @@ MDD      = min_t ( V_t − max_(s≤t) V_s ) / max_(s≤t) V_s`}
             o nákladovosti, ale o odlišne zvolenom riziku.
           </p>
 
-          <h4 className="hz-subhead" style={{ margin: 'var(--s-7) 0 var(--s-4)' }}>
+          <h4 className="sp-subhead" style={{ margin: 'var(--s-7) 0 var(--s-4)' }}>
             Daňový režim
           </h4>
           <ul style={{ fontSize: 'var(--fs-small)', paddingLeft: '1.2em' }}>
@@ -285,14 +285,14 @@ MDD      = min_t ( V_t − max_(s≤t) V_s ) / max_(s≤t) V_s`}
         </Step>
       </div>
 
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Hranice"
           title="Čo model nedokáže a kde sa mýli"
           lead="Uvedenie predpokladov nie je formalita. Ktorýkoľvek z nich môže výsledok posunúť viac než rozdiel medzi porovnávanými cestami."
         />
 
-        <div className="hz-stack">
+        <div className="sp-stack">
           <Note tone="warn">
             <strong>Parametre sú odvodené z minulosti.</strong> Model predpokladá, že
             dlhodobé rozdelenie výnosov a korelácií zostane podobné. Korelácie však

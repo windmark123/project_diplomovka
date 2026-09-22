@@ -90,19 +90,19 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
 
   if (!a.profile.isComplete && !showIncomplete) {
     return (
-      <section className="hz-page hz-page--app hz-section--tight">
+      <section className="sp-page sp-page--app sp-section--tight">
         <Panel padded>
           <Label>Dotazník nie je dokončený</Label>
-          <h1 className="hz-title" style={{ margin: 'var(--s-5) 0 var(--s-6)', maxWidth: '24ch' }}>
+          <h1 className="sp-title" style={{ margin: 'var(--s-5) 0 var(--s-6)', maxWidth: '24ch' }}>
             Výsledky stoja na úplných odpovediach
           </h1>
-          <p className="hz-lead" style={{ marginBottom: 'var(--s-8)' }}>
+          <p className="sp-lead" style={{ marginBottom: 'var(--s-8)' }}>
             Zodpovedaných je {a.profile.answeredCount} zo 16 otázok. Nezodpovedané sa
             počítajú ako nulové skóre, takže by vám model navrhol opatrnejšie portfólio,
             než zodpovedá skutočnosti. Výsledky si aj tak môžete pozrieť — len s týmto
             vedomím.
           </p>
-          <div className="hz-row">
+          <div className="sp-row">
             <Button variant="signal" onClick={() => navigate('/nastroj')}>
               Dokončiť dotazník
             </Button>
@@ -116,7 +116,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
   const spread = sim.terminal.p95 - sim.terminal.p5;
 
   return (
-    <div className="hz-page hz-page--app" style={{ paddingBlock: 'var(--s-9) 0' }}>
+    <div className="sp-page sp-page--app" style={{ paddingBlock: 'var(--s-9) 0' }}>
       {!a.profile.isComplete && (
         <Note tone="warn" style={{ marginBottom: 'var(--s-7)' }}>
           Dotazník nie je dokončený — zodpovedaných je {a.profile.answeredCount} zo 16
@@ -126,21 +126,21 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       )}
 
       {/* ── Verdikt ──────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-verdict">
-        <div className="hz-verdict__grid">
+      <Reveal as="section" className="sp-verdict">
+        <div className="sp-verdict__grid">
           <div>
             <Label>Váš rizikový profil</Label>
-            <h1 className="hz-verdict__name" style={{ marginTop: 'var(--s-5)' }}>
+            <h1 className="sp-verdict__name" style={{ marginTop: 'var(--s-5)' }}>
               {profile.name}
             </h1>
             <p
-              className="hz-lead"
+              className="sp-lead"
               style={{ marginTop: 'var(--s-6)', color: 'var(--text-body)', maxWidth: '46ch' }}
             >
               {profile.lead}
             </p>
 
-            <div className="hz-row" style={{ marginTop: 'var(--s-7)', gap: 'var(--s-3)' }}>
+            <div className="sp-row" style={{ marginTop: 'var(--s-7)', gap: 'var(--s-3)' }}>
               <Badge tone="signal">Skóre {a.profile.score} / 100</Badge>
               <Badge tone="quiet">
                 Riziková zložka {profile.equityBand[0]}–{profile.equityBand[1]} %
@@ -154,52 +154,52 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           <div>
             <Label>Oproti III. pilieru pri rovnakom vklade a riziku</Label>
             <AnimatedNumber
-              className="hz-verdict__figure"
+              className="sp-verdict__figure"
               style={{ marginTop: 'var(--s-5)' }}
               value={cmp.ownVsPillar3}
               format={(v) => signed(v, eurSign)}
             />
-            <p className="hz-micro" style={{ margin: 'var(--s-4) 0 var(--s-8)', color: 'var(--text-muted)' }}>
+            <p className="sp-micro" style={{ margin: 'var(--s-4) 0 var(--s-8)', color: 'var(--text-muted)' }}>
               na konci horizontu. Rovnaké vstupy, rovnaké riziko — líši sa len
               nákladovosť a daňový režim.
             </p>
 
-            <div className="hz-verdict__stats">
-              <div className="hz-verdict__stat">
+            <div className="sp-verdict__stats">
+              <div className="sp-verdict__stat">
                 <Label>Medián</Label>
-                <AnimatedNumber value={sim.terminal.p50} format={eurShortSign} className="hz-verdict__stat-v" />
-                <span className="hz-micro" style={{ color: 'var(--text-muted)' }}>
+                <AnimatedNumber value={sim.terminal.p50} format={eurShortSign} className="sp-verdict__stat-v" />
+                <span className="sp-micro" style={{ color: 'var(--text-muted)' }}>
                   reálne {eurShortSign(sim.terminal.medianReal)}
                 </span>
               </div>
-              <div className="hz-verdict__stat">
+              <div className="sp-verdict__stat">
                 <Label>Rozpätie</Label>
-                <AnimatedNumber value={spread} format={eurShortSign} className="hz-verdict__stat-v" />
-                <span className="hz-micro" style={{ color: 'var(--text-muted)' }}>
+                <AnimatedNumber value={spread} format={eurShortSign} className="sp-verdict__stat-v" />
+                <span className="sp-micro" style={{ color: 'var(--text-muted)' }}>
                   medzi 5. a 95. percentilom
                 </span>
               </div>
-              <div className="hz-verdict__stat">
+              <div className="sp-verdict__stat">
                 <Label>Výnosnosť vkladov</Label>
                 <AnimatedNumber
                   value={cmp.own.irr * 100}
                   format={(v) => pctValue(v, 2)}
-                  className="hz-verdict__stat-v"
+                  className="sp-verdict__stat-v"
                 />
-                <span className="hz-micro" style={{ color: 'var(--text-muted)' }}>
+                <span className="sp-micro" style={{ color: 'var(--text-muted)' }}>
                   p. a. · III. pilier {pct(cmp.pillar3.irr, 2)}
                 </span>
               </div>
               {/* Štvrtý údaj je zámerne ten nepríjemný. Verdikt, ktorý ukazuje
                   len výnos, by komisii aj sporiteľovi zamlčal polovicu veci. */}
-              <div className="hz-verdict__stat">
+              <div className="sp-verdict__stat">
                 <Label>Najhorší pokles</Label>
                 <AnimatedNumber
                   value={sim.drawdown.worst * 100}
                   format={(v) => pctValue(v, 1)}
-                  className="hz-verdict__stat-v"
+                  className="sp-verdict__stat-v"
                 />
-                <span className="hz-micro" style={{ color: 'var(--text-muted)' }}>
+                <span className="sp-micro" style={{ color: 'var(--text-muted)' }}>
                   naprieč {eur(sim.paths)} scenármi
                 </span>
               </div>
@@ -209,7 +209,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Lepkavý kontext ──────────────────────────────────────────────── */}
-      <div className="hz-context hz-no-print">
+      <div className="sp-context sp-no-print">
         <dl>
           <dt>Variant</dt>
           <dd>{state.variant ? VARIANTS.find((v) => v.id === state.variant)?.name : 'Vlastné'}</dd>
@@ -226,14 +226,14 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           <dt>Volatilita</dt>
           <dd>{pctValue(a.stats.volatility * 100, 1)}</dd>
         </dl>
-        <div className="hz-row" style={{ marginLeft: 'auto', gap: 'var(--s-2)' }}>
+        <div className="sp-row" style={{ marginLeft: 'auto', gap: 'var(--s-2)' }}>
           <Button size="sm" onClick={() => navigate('/nastroj')}>
             Upraviť
           </Button>
           <Button size="sm" onClick={onShare}>
             {copied ? 'Skopírované' : 'Zdieľať'}
           </Button>
-          <Button size="sm" onClick={() => downloadCsv('horizont-vysledky.csv', resultsCsv(state, a))}>
+          <Button size="sm" onClick={() => downloadCsv('stvrty-pilier-vysledky.csv', resultsCsv(state, a))}>
             CSV
           </Button>
           <Button size="sm" onClick={() => window.print()}>
@@ -243,7 +243,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       </div>
 
       {/* ── Simulácia ────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-section--tight">
+      <Reveal as="section" className="sp-section--tight">
         <SectionHead
           label="Monte Carlo"
           title="Rozpätie, nie predpoveď"
@@ -264,7 +264,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           />
         </Panel>
 
-        <div className="hz-kpis" style={{ marginTop: 'var(--s-6)' }}>
+        <div className="sp-kpis" style={{ marginTop: 'var(--s-6)' }}>
           {[
             {
               label: 'Pesimistický scenár',
@@ -289,15 +289,15 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
               tone: sim.probBelowInvested > 0.1 ? ('neg' as const) : undefined,
             },
           ].map((k) => (
-            <div key={k.label} className={`hz-kpi hz-metric${k.tone ? ` hz-metric--${k.tone}` : ''}`}>
+            <div key={k.label} className={`sp-kpi sp-metric${k.tone ? ` sp-metric--${k.tone}` : ''}`}>
               <Label>{k.label}</Label>
-              <span className="hz-metric__v">{k.value}</span>
+              <span className="sp-metric__v">{k.value}</span>
               <p>{k.desc}</p>
             </div>
           ))}
         </div>
 
-        <div className="hz-kpis" style={{ marginTop: 'var(--s-3)' }}>
+        <div className="sp-kpis" style={{ marginTop: 'var(--s-3)' }}>
           {[
             {
               label: 'Medián max. poklesu',
@@ -317,9 +317,9 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
               desc: `Priemerná ročná strata v najhorších 5 % rokov. VaR je ${pct(a.var95, 1)}.`,
             },
           ].map((k) => (
-            <div key={k.label} className={`hz-kpi hz-metric${k.tone ? ` hz-metric--${k.tone}` : ''}`}>
+            <div key={k.label} className={`sp-kpi sp-metric${k.tone ? ` sp-metric--${k.tone}` : ''}`}>
               <Label>{k.label}</Label>
-              <span className="hz-metric__v">{k.value}</span>
+              <span className="sp-metric__v">{k.value}</span>
               <p>{k.desc}</p>
             </div>
           ))}
@@ -327,7 +327,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Varianty ─────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-section--tight">
+      <Reveal as="section" className="sp-section--tight">
         <SectionHead
           label="Variantné riešenia"
           title="Tri metódy konštrukcie v pásme vášho profilu"
@@ -357,13 +357,13 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           />
         </Panel>
 
-        <div className="hz-rail" style={{ marginTop: 'var(--s-6)' }}>
+        <div className="sp-rail" style={{ marginTop: 'var(--s-6)' }}>
           {a.variants.map((v, i) => {
             const active = state.variant === v.definition.id;
             return (
               <Reveal key={v.definition.id} index={i}>
                 <Panel
-                  className={`hz-variant hz-panel--interactive${active ? ' hz-panel--selected' : ''}`}
+                  className={`sp-variant sp-panel--interactive${active ? ' sp-panel--selected' : ''}`}
                   onClick={() => set({ variant: v.definition.id, customAllocation: null })}
                   role="button"
                   tabIndex={0}
@@ -375,14 +375,14 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                     }
                   }}
                 >
-                  <div className="hz-variant__head">
+                  <div className="sp-variant__head">
                     <Label>{v.definition.method}</Label>
                     {active && <Badge tone="signal">Zvolený</Badge>}
                   </div>
-                  <h3 className="hz-subhead" style={{ margin: '0 0 var(--s-4)' }}>
+                  <h3 className="sp-subhead" style={{ margin: '0 0 var(--s-4)' }}>
                     {v.definition.name}
                   </h3>
-                  <p className="hz-micro hz-variant__desc">{v.definition.description}</p>
+                  <p className="sp-micro sp-variant__desc">{v.definition.description}</p>
 
                   {/* Pružný riadok mriežky by prstenec roztiahol; zloženia
                       s dvoma a siedmimi triedami by potom mali kruh v inej výške. */}
@@ -395,16 +395,16 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                     />
                   </div>
 
-                  <div className="hz-kpis" style={{ marginTop: 'var(--s-6)' }}>
+                  <div className="sp-kpis" style={{ marginTop: 'var(--s-6)' }}>
                     {[
                       ['Výnos p. a.', pctValue(v.stats.expectedReturn * 100, 2)],
                       ['Volatilita', pctValue(v.stats.volatility * 100, 1)],
                       ['Sharpe', ratio(v.sharpe)],
                       ['TER', pctValue(v.stats.ter * 100, 2)],
                     ].map(([l, val]) => (
-                      <div key={l} className="hz-kpi hz-metric">
+                      <div key={l} className="sp-kpi sp-metric">
                         <Label>{l}</Label>
-                        <span className="hz-metric__v" style={{ fontSize: 'var(--fs-head)' }}>
+                        <span className="sp-metric__v" style={{ fontSize: 'var(--fs-head)' }}>
                           {val}
                         </span>
                       </div>
@@ -420,7 +420,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       <AllocationEditor />
 
       {/* ── Porovnanie ───────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-section--tight">
+      <Reveal as="section" className="sp-section--tight">
         <SectionHead
           label="Porovnanie"
           title="Vaše portfólio vedľa II. a III. piliera"
@@ -472,8 +472,8 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           />
         </Panel>
 
-        <div className="hz-row" style={{ marginTop: 'var(--s-8)', marginBottom: 'var(--s-6)' }}>
-          <div className="hz-tabs" role="tablist" aria-label="Pohľady na porovnanie">
+        <div className="sp-row" style={{ marginTop: 'var(--s-8)', marginBottom: 'var(--s-6)' }}>
+          <div className="sp-tabs" role="tablist" aria-label="Pohľady na porovnanie">
             {TABS.map((t) => (
               <button
                 key={t.id}
@@ -491,7 +491,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
         </div>
 
         <div
-          className="hz-tabpanel"
+          className="sp-tabpanel"
           role="tabpanel"
           id={`panel-${tab}`}
           aria-labelledby={`tab-${tab}`}
@@ -530,7 +530,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           )}
 
           {tab === 'costs' && (
-            <div className="hz-stack hz-stack--lg">
+            <div className="sp-stack sp-stack--lg">
               {cmp.routes.map((r) => (
                 <Panel key={r.id} padded label={`${r.label} · ${r.detail}`}>
                   <ValueWaterfall
@@ -545,9 +545,9 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
 
           {tab === 'table' && (
             <>
-              <div className="hz-table-wrap">
-                <table className="hz-table">
-                  <caption className="hz-sr">
+              <div className="sp-table-wrap">
+                <table className="sp-table">
+                  <caption className="sp-sr">
                     Porovnanie troch ciest dôchodkového zabezpečenia na konci horizontu
                   </caption>
                   <thead>
@@ -579,7 +579,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                             }}
                           />
                           {r.label}
-                          <span className="hz-faint" style={{ display: 'block', marginLeft: 18 }}>
+                          <span className="sp-faint" style={{ display: 'block', marginLeft: 18 }}>
                             {r.detail}
                           </span>
                         </th>
@@ -598,7 +598,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                   </tbody>
                 </table>
               </div>
-              <p className="hz-micro" style={{ marginTop: 'var(--s-4)' }}>
+              <p className="sp-micro" style={{ marginTop: 'var(--s-4)' }}>
                 Riziková zložka je priemer za celý horizont vrátane vplyvu glide path, nie
                 počiatočná váha. Vaše portfólio začína na {Math.round(a.stats.risky)} %
                 a postupne klesá — práve na túto priemernú hodnotu sú zosúladené fondy
@@ -608,17 +608,17 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
           )}
         </div>
 
-        <div className="hz-kpis" style={{ marginTop: 'var(--s-7)' }}>
-          <div className={`hz-kpi hz-metric hz-metric--${cmp.ownVsPillar3 >= 0 ? 'pos' : 'neg'}`}>
+        <div className="sp-kpis" style={{ marginTop: 'var(--s-7)' }}>
+          <div className={`sp-kpi sp-metric sp-metric--${cmp.ownVsPillar3 >= 0 ? 'pos' : 'neg'}`}>
             <Label>Rozdiel voči III. pilieru</Label>
-            <span className="hz-metric__v">
+            <span className="sp-metric__v">
               <AnimatedNumber value={cmp.ownVsPillar3} format={(v) => signed(v, eurShortSign)} />
             </span>
             <p>Pri rovnakom vklade {eurSign(state.monthly)} mesačne a zhodnom riziku.</p>
           </div>
-          <div className="hz-kpi hz-metric">
+          <div className="sp-kpi sp-metric">
             <Label>Ušetrené na poplatkoch</Label>
-            <span className="hz-metric__v">
+            <span className="sp-metric__v">
               <AnimatedNumber value={cmp.pillar3.fees - cmp.own.fees} format={eurShortSign} />
             </span>
             <p>
@@ -626,9 +626,9 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
               {eurSign(cmp.own.fees)}.
             </p>
           </div>
-          <div className="hz-kpi hz-metric">
+          <div className="sp-kpi sp-metric">
             <Label>Ušetrené na dani</Label>
-            <span className="hz-metric__v">
+            <span className="sp-metric__v">
               <AnimatedNumber value={cmp.pillar3.tax} format={eurShortSign} />
             </span>
             <p>
@@ -637,9 +637,9 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                 : 'Časový test nie je splnený, zisk podlieha dani.'}
             </p>
           </div>
-          <div className="hz-kpi hz-metric">
+          <div className="sp-kpi sp-metric">
             <Label>Vnútorná výnosnosť</Label>
-            <span className="hz-metric__v">
+            <span className="sp-metric__v">
               <AnimatedNumber value={cmp.own.irr * 100} format={(v) => pctValue(v, 2)} />
             </span>
             <p>Vašich vkladov p. a. V III. pilieri {pct(cmp.pillar3.irr, 2)}.</p>
@@ -648,15 +648,15 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Odporúčanie ──────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-section--tight">
-        <div className="hz-split" style={{ alignItems: 'start' }}>
+      <Reveal as="section" className="sp-section--tight">
+        <div className="sp-split" style={{ alignItems: 'start' }}>
           <div>
             <Label>Odporúčanie pre váš profil</Label>
-            <h2 className="hz-title" style={{ margin: 'var(--s-5) 0 0', maxWidth: '20ch' }}>
+            <h2 className="sp-title" style={{ margin: 'var(--s-5) 0 0', maxWidth: '20ch' }}>
               Čo z toho vyplýva
             </h2>
           </div>
-          <div className="hz-stack">
+          <div className="sp-stack">
             <p style={{ margin: 0 }}>{profile.recommendation}</p>
             <Note tone="info">
               Do II. piliera vstupuje odvod {pct(PILLAR_2.contributionRate.value, 0)} z hrubej
@@ -671,13 +671,13 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
               môže prevážiť nákladový handicap DDS — vtedy dáva zmysel kombinácia oboch
               ciest, nie voľba jednej.
             </Note>
-            <p className="hz-micro" style={{ margin: 0 }}>
+            <p className="sp-micro" style={{ margin: 0 }}>
               Daňová úľava v III. pilieri je modelovaná do stropu{' '}
               {eurSign(PILLAR_3.taxReliefCap.value)} ročne pri sadzbe{' '}
               {pct(PILLAR_3.incomeTaxRate.value, 0)}. Inflácia {pct(MACRO.inflation.value, 1)} p. a.
               Bezriziková sadzba {pct(RISK_FREE, 1)}.
             </p>
-            <div className="hz-row hz-no-print">
+            <div className="sp-row sp-no-print">
               <Button onClick={() => navigate('/metodika')}>Ako sa to počíta</Button>
               <Button onClick={() => navigate('/data')}>Dáta a zdroje</Button>
             </div>
@@ -739,7 +739,7 @@ function AllocationEditor() {
   const total = ASSET_CLASSES.reduce((s, c) => s + (current[c.id] ?? 0), 0);
 
   return (
-    <Reveal as="section" className="hz-section--tight">
+    <Reveal as="section" className="sp-section--tight">
       <SectionHead
         label="Editor"
         title="Vlastné zloženie"
@@ -761,9 +761,9 @@ function AllocationEditor() {
         }
       />
 
-      <div className="hz-split" style={{ alignItems: 'start' }}>
+      <div className="sp-split" style={{ alignItems: 'start' }}>
         <Panel padded label="Váhy tried aktív">
-          <div className="hz-stack hz-stack--lg">
+          <div className="sp-stack sp-stack--lg">
             {ASSET_CLASSES.map((c) => {
               const value = current[c.id] ?? 0;
               return (
@@ -820,25 +820,25 @@ function AllocationEditor() {
             centerValue={`${Math.round(a.stats.risky)} %`}
             centerLabel="RIZIKO"
           />
-          <div className="hz-kpis" style={{ marginTop: 'var(--s-6)' }}>
+          <div className="sp-kpis" style={{ marginTop: 'var(--s-6)' }}>
             {[
               ['Výnos p. a.', pctValue(a.stats.expectedReturn * 100, 2)],
               ['Volatilita', pctValue(a.stats.volatility * 100, 1)],
               ['Sharpe', ratio(a.sharpe)],
               ['TER', pctValue(a.stats.ter * 100, 2)],
             ].map(([l, v]) => (
-              <div key={l} className="hz-kpi hz-metric">
+              <div key={l} className="sp-kpi sp-metric">
                 <Label>{l}</Label>
-                <span className="hz-metric__v" style={{ fontSize: 'var(--fs-head)' }}>{v}</span>
+                <span className="sp-metric__v" style={{ fontSize: 'var(--fs-head)' }}>{v}</span>
               </div>
             ))}
           </div>
         </Panel>
       </div>
 
-      <div className="hz-editor-settings">
+      <div className="sp-editor-settings">
         <Panel padded label="Výber fondov">
-          <div className="hz-stack">
+          <div className="sp-stack">
             {ASSET_CLASSES.filter((c) => (current[c.id] ?? 0) > 0.05).map((c) => (
               <Field
                 key={c.id}
@@ -867,13 +867,13 @@ function AllocationEditor() {
           >
             Zapnúť glide path
           </Switch>
-          <p className="hz-field__hint" style={{ margin: 'var(--s-4) 0 var(--s-6)' }}>
+          <p className="sp-field__hint" style={{ margin: 'var(--s-4) 0 var(--s-6)' }}>
             Riziková zložka klesá lineárne v poslednom úseku horizontu, aby pokles trhu
             tesne pred dôchodkom nezasiahol celý majetok vtedy, keď už nezostáva čas na
             zotavenie.
           </p>
           {state.glidepath.enabled && (
-            <div className="hz-stack hz-stack--lg">
+            <div className="sp-stack sp-stack--lg">
               <Field label="Dĺžka znižovania" value={yearsLabel(state.glidepath.years)} htmlFor="gp-years">
                 <Range
                   id="gp-years"

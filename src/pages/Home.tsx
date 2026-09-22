@@ -76,22 +76,22 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="hz-page" style={{ paddingBlock: 'var(--s-13) var(--s-11)' }}>
+      <section className="sp-page" style={{ paddingBlock: 'var(--s-13) var(--s-11)' }}>
         <div style={{ overflow: 'hidden' }}>
-          <Label className="hz-label--exact">
+          <Label className="sp-label--exact">
             <span style={{ color: 'var(--text-accent)' }}>
               MiFID II · II. a III. pilier · {ASSET_CLASSES.length} tried aktív
             </span>
           </Label>
         </div>
 
-        <h1 className="hz-hero-title" style={{ marginTop: 'var(--s-6)', maxWidth: '16em' }}>
-          <span className="hz-mask">
+        <h1 className="sp-hero-title" style={{ marginTop: 'var(--s-6)', maxWidth: '16em' }}>
+          <span className="sp-mask">
             <span>Dôchodok</span>
           </span>
-          <span className="hz-mask">
+          <span className="sp-mask">
             <span
-              className="hz-display"
+              className="sp-display"
               style={{ color: 'var(--text-muted)', animationDelay: '110ms' }}
             >
               bez dohadov.
@@ -100,16 +100,16 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
         </h1>
 
         <div
-          className="hz-split"
+          className="sp-split"
           style={{ marginTop: 'var(--s-10)', gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.25fr)' }}
         >
-          <div className="hz-up" style={{ animationDelay: '260ms' }}>
-            <p className="hz-lead">
+          <div className="sp-up" style={{ animationDelay: '260ms' }}>
+            <p className="sp-lead">
               Dotazník určí váš rizikový profil. Model postaví vaše portfólio z reálnych ETF
               vedľa fondov DSS a DDS — na rovnakých vstupoch, rovnakom horizonte a pri
               rovnakej miere rizika.
             </p>
-            <div className="hz-row" style={{ marginTop: 'var(--s-9)' }}>
+            <div className="sp-row" style={{ marginTop: 'var(--s-9)' }}>
               <Button variant="signal" size="lg" onClick={() => navigate('/nastroj')}>
                 Spustiť analýzu
               </Button>
@@ -117,33 +117,33 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
                 Ako model počíta
               </Button>
             </div>
-            <p className="hz-micro" style={{ marginTop: 'var(--s-8)', maxWidth: '44ch' }}>
-              Horizont neponúka finančné produkty ani investičné poradenstvo. Všetko sa
+            <p className="sp-micro" style={{ marginTop: 'var(--s-8)', maxWidth: '44ch' }}>
+              Štvrtý pilier neponúka finančné produkty ani investičné poradenstvo. Všetko sa
               počíta vo vašom prehliadači.
             </p>
           </div>
 
-          <Panel className="hz-up" style={{ animationDelay: '340ms' }}>
-            <div className="hz-row hz-row--between" style={{ marginBottom: 'var(--s-6)' }}>
+          <Panel className="sp-up" style={{ animationDelay: '340ms' }}>
+            <div className="sp-row sp-row--between" style={{ marginBottom: 'var(--s-6)' }}>
               <Label>
                 Modelový prípad · {CASE.monthly} € mesačne · {yearsLabel(CASE.years)}
               </Label>
-              <span className="hz-num hz-micro">
+              <span className="sp-num sp-micro">
                 profil {model.profile.name.toLowerCase()}, nominálne
               </span>
             </div>
 
             <div
-              className="hz-row"
+              className="sp-row"
               style={{ alignItems: 'baseline', gap: 'var(--s-4)', marginBottom: 'var(--s-7)' }}
             >
               <AnimatedNumber
-                className="hz-figure"
+                className="sp-figure"
                 value={comparison.ownVsPillar3}
                 format={eurShort}
                 duration={1500}
               />
-              <span className="hz-subhead" style={{ color: 'var(--text-muted)' }}>
+              <span className="sp-subhead" style={{ color: 'var(--text-muted)' }}>
                 € navyše oproti III. pilieru
               </span>
             </div>
@@ -192,14 +192,14 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </section>
 
       {/* ── Výstupy ──────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-page hz-section" id="vystupy">
+      <Reveal as="section" className="sp-page sp-section" id="vystupy">
         <SectionHead
           label="Výstupy práce"
           title="Čo model počíta a čo z toho vyplýva"
           lead="Každá dlaždica je živý výstup nástroja, nie ilustrácia. Rovnaké vstupy prechádzajú všetkými tromi cestami, takže rozdiely vznikajú výnosom, poplatkom a daňou — nie odlišným zadaním."
         />
 
-        <div className="hz-bento">
+        <div className="sp-bento">
           <Panel
             span={2}
             label="Porovnanie na konci horizontu"
@@ -235,31 +235,31 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
           </Panel>
 
           <Panel label="Rizikový profil" title="Dotazník MiFID II">
-            <span className="hz-figure">{QUESTION_COUNT}</span>
-            <p className="hz-micro" style={{ marginTop: 'var(--s-4)' }}>
+            <span className="sp-figure">{QUESTION_COUNT}</span>
+            <p className="sp-micro" style={{ marginTop: 'var(--s-4)' }}>
               otázok v štyroch oblastiach, vážené skórovanie s poistkami na finančnú
               kapacitu a dĺžku horizontu.
             </p>
           </Panel>
 
           <Panel label="Simulácia" title="Rozpätie, nie predpoveď">
-            <span className="hz-figure">2 000</span>
-            <p className="hz-micro" style={{ marginTop: 'var(--s-4)' }}>
+            <span className="sp-figure">2 000</span>
+            <p className="sp-micro" style={{ marginTop: 'var(--s-4)' }}>
               scenárov Monte Carlo s korelovanými výnosmi tried aktív. Výsledkom je
               percentilové pásmo, nie jedno číslo.
             </p>
           </Panel>
 
           <Panel label="Reálna hodnota" title="Inflačné očistenie všade">
-            <span className="hz-figure">{pct(MACRO.inflation.value, 1)}</span>
-            <p className="hz-micro" style={{ marginTop: 'var(--s-4)' }}>
+            <span className="sp-figure">{pct(MACRO.inflation.value, 1)}</span>
+            <p className="sp-micro" style={{ marginTop: 'var(--s-4)' }}>
               ročne. Každá suma má vedľa seba hodnotu v dnešnej kúpnej sile. Bez výnimky.
             </p>
           </Panel>
 
           <Panel label="Varianty" title="Tri metódy konštrukcie">
-            <span className="hz-figure">{VARIANTS.length}+n</span>
-            <p className="hz-micro" style={{ marginTop: 'var(--s-4)' }}>
+            <span className="sp-figure">{VARIANTS.length}+n</span>
+            <p className="sp-micro" style={{ marginTop: 'var(--s-4)' }}>
               návrhy v pásme vášho profilu plus vlastné zloženie, ktoré si nastavíte
               v editore váh.
             </p>
@@ -268,25 +268,25 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Poplatky ─────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-slab hz-section" style={{ marginTop: 'var(--section-y)' }}>
-        <div className="hz-page">
-          <div className="hz-split" style={{ alignItems: 'center' }}>
+      <Reveal as="section" className="sp-slab sp-section" style={{ marginTop: 'var(--section-y)' }}>
+        <div className="sp-page">
+          <div className="sp-split" style={{ alignItems: 'center' }}>
             <div>
               <Label>Nosné zistenie</Label>
               <h2
-                className="hz-display"
+                className="sp-display"
                 style={{ margin: 'var(--s-5) 0 0', maxWidth: '18ch', color: 'var(--paper-1)' }}
               >
                 Jedno percento ročne stojí {pct((cheapest - atDdsFee) / cheapest, 0)} úspor.
               </h2>
-              <p className="hz-lead" style={{ marginTop: 'var(--s-7)' }}>
+              <p className="sp-lead" style={{ marginTop: 'var(--s-7)' }}>
                 Poplatok si všimnete na výpise. Rozdiel medzi indexovým ETF a fondom
                 s vyššou nákladovosťou si všimnete až na konci horizontu.
               </p>
 
-              <div className="hz-row" style={{ gap: 'var(--s-9)', marginTop: 'var(--s-9)' }}>
+              <div className="sp-row" style={{ gap: 'var(--s-9)', marginTop: 'var(--s-9)' }}>
                 <span style={{ display: 'block' }}>
-                  <span className="hz-figure" style={{ color: 'var(--accent)' }}>
+                  <span className="sp-figure" style={{ color: 'var(--accent)' }}>
                     −{eurShort(cheapest - atDdsFee)}
                   </span>
                   <Label>
@@ -296,7 +296,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
                   </Label>
                 </span>
                 <span style={{ display: 'block' }}>
-                  <span className="hz-figure">{pct((cheapest - atDdsFee) / cheapest, 0)}</span>
+                  <span className="sp-figure">{pct((cheapest - atDdsFee) / cheapest, 0)}</span>
                   <Label>
                     <span style={{ display: 'block', marginTop: 'var(--s-4)' }}>
                       konečnej hodnoty
@@ -328,14 +328,14 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Postup ───────────────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-page hz-section">
+      <Reveal as="section" className="sp-page sp-section">
         <SectionHead
           label="Postup"
           title="Tri kroky od dotazníka po porovnanie"
           lead="Metodika je zámerne otvorená. Každý medzivýsledok sa dá skontrolovať a každý parameter zmeniť."
         />
 
-        <div className="hz-bento">
+        <div className="sp-bento">
           {[
             {
               n: '01',
@@ -354,9 +354,9 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             },
           ].map((s) => (
             <Panel key={s.n} span={2} className={undefined}>
-              <div className="hz-row" style={{ alignItems: 'baseline', gap: 'var(--s-5)' }}>
+              <div className="sp-row" style={{ alignItems: 'baseline', gap: 'var(--s-5)' }}>
                 <span
-                  className="hz-num"
+                  className="sp-num"
                   style={{
                     fontSize: 'var(--fs-head)',
                     color: 'var(--text-accent)',
@@ -365,7 +365,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
                 >
                   {s.n}
                 </span>
-                <h3 className="hz-subhead" style={{ margin: 0 }}>
+                <h3 className="sp-subhead" style={{ margin: 0 }}>
                   {s.title}
                 </h3>
               </div>
@@ -376,15 +376,15 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Hranice modelu ───────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-page hz-section--tight">
-        <div className="hz-split">
+      <Reveal as="section" className="sp-page sp-section--tight">
+        <div className="sp-split">
           <div>
             <Label>Hranice</Label>
-            <h2 className="hz-title" style={{ margin: 'var(--s-5) 0 0', maxWidth: '20ch' }}>
+            <h2 className="sp-title" style={{ margin: 'var(--s-5) 0 0', maxWidth: '20ch' }}>
               Čo tento model nedokáže
             </h2>
           </div>
-          <div className="hz-stack">
+          <div className="sp-stack">
             <Note tone="warn">
               Model nepredpovedá budúcnosť. Pracuje s dlhodobými parametrami tried aktív
               odvodenými z minulosti a s predpokladom, že ich rozdelenie zostane podobné.
@@ -406,7 +406,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </Reveal>
 
       {/* ── Záverečná výzva ──────────────────────────────────────────────── */}
-      <Reveal as="section" className="hz-page">
+      <Reveal as="section" className="sp-page">
         <Panel padded={false}>
           <div
             style={{
@@ -418,12 +418,12 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             }}
           >
             <h2
-              className="hz-title"
+              className="sp-title"
               style={{ margin: 0, color: 'var(--on-accent)', maxWidth: '20ch' }}
             >
               Rozhodnutie o štyridsiatich rokoch si zaslúži čísla.
             </h2>
-            <div className="hz-row">
+            <div className="sp-row">
               <Button variant="glass" size="lg" onClick={() => navigate('/nastroj')}>
                 Spustiť analýzu
               </Button>
@@ -431,7 +431,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
           </div>
         </Panel>
 
-        <div className="hz-kpis" style={{ marginTop: 'var(--s-8)' }}>
+        <div className="sp-kpis" style={{ marginTop: 'var(--s-8)' }}>
           <Kpi
             label="Modelový vklad"
             value={eurShort(CASE.monthly)}

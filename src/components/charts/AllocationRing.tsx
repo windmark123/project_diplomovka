@@ -157,7 +157,7 @@ export function AllocationRing({
             <span style={{ color: 'var(--text-body)', minWidth: 0 }}>
               {s.short}
               {s.fund && (
-                <span className="hz-faint" style={{ marginLeft: 6 }}>
+                <span className="sp-faint" style={{ marginLeft: 6 }}>
                   {s.fund.ticker}
                 </span>
               )}

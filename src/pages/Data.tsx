@@ -62,13 +62,13 @@ export function Data() {
   const needsVerification = LEGAL_ROWS.filter((p) => p.verify).length;
 
   return (
-    <div className="hz-page hz-page--app hz-section--tight">
+    <div className="sp-page sp-page--app sp-section--tight">
       <section>
         <Label>Dáta a zdroje</Label>
-        <h1 className="hz-title" style={{ margin: 'var(--s-5) 0 var(--s-7)', maxWidth: '24ch' }}>
+        <h1 className="sp-title" style={{ margin: 'var(--s-5) 0 var(--s-7)', maxWidth: '24ch' }}>
           Každý parameter, s ktorým model počíta
         </h1>
-        <p className="hz-lead">
+        <p className="sp-lead">
           Parametre tried aktív zodpovedajú obdobiu {DATA_VINTAGE.period} a sú vyjadrené
           v {DATA_VINTAGE.currency}. Právne parametre boli naposledy overené{' '}
           {LEGAL_VINTAGE.verifiedOn}.
@@ -90,14 +90,14 @@ export function Data() {
       </section>
 
       {/* ── Triedy aktív ─────────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Triedy aktív"
           title="Výnos, volatilita a historický pokles"
           lead="Výnosy sú nominálne, pred nákladovosťou fondu. Maximálny historický pokles slúži len ako kontext — do výpočtu nevstupuje."
         />
-        <div className="hz-table-wrap">
-          <table className="hz-table">
+        <div className="sp-table-wrap">
+          <table className="sp-table">
             <thead>
               <tr>
                 <th scope="col">Trieda aktív</th>
@@ -136,14 +136,14 @@ export function Data() {
       </section>
 
       {/* ── Fondy ────────────────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Nástroje"
           title="Konkrétne ETF"
           lead="Všetky fondy sú UCITS s domicilom v EÚ. Nákladovosť a ISIN treba pri finalizácii práce overiť voči aktuálnemu dokumentu s kľúčovými informáciami, pretože sa v čase menia."
         />
-        <div className="hz-table-wrap">
-          <table className="hz-table">
+        <div className="sp-table-wrap">
+          <table className="sp-table">
             <thead>
               <tr>
                 <th scope="col">Ticker</th>
@@ -179,7 +179,7 @@ export function Data() {
       </section>
 
       {/* ── Korelácie ────────────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Korelácie"
           title="Matica ročných výnosov"
@@ -188,10 +188,10 @@ export function Data() {
         <Panel padded>
           <div style={{ overflowX: 'auto' }}>
             <table
-              className="hz-table"
+              className="sp-table"
               style={{ minWidth: 520, fontFamily: 'var(--font-mono)' }}
             >
-              <caption className="hz-sr">Korelačná matica tried aktív</caption>
+              <caption className="sp-sr">Korelačná matica tried aktív</caption>
               <thead>
                 <tr>
                   <th scope="col" />
@@ -229,14 +229,14 @@ export function Data() {
       </section>
 
       {/* ── Právne parametre ─────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Právne parametre"
           title="Sadzby, stropy a ich zdroj"
           lead="Parametre označené ako „overiť“ sa v poslednej dekáde menili opakovane. Všetky sú editovateľné v nástroji, takže model je použiteľný aj po zmene legislatívy."
         />
-        <div className="hz-table-wrap">
-          <table className="hz-table">
+        <div className="sp-table-wrap">
+          <table className="sp-table">
             <thead>
               <tr>
                 <th scope="col">Parameter</th>
@@ -264,30 +264,30 @@ export function Data() {
       </section>
 
       {/* ── Správcovia ───────────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Správcovia"
           title="Odplaty v II. a III. pilieri"
           lead="Odplata za správu je hlavnou príčinou rozdielu medzi vlastným portfóliom a tretím pilierom. Hodnoty treba overiť voči štatútom fondov a výkazom zverejneným na stránke NBS."
         />
-        <div className="hz-split" style={{ alignItems: 'start' }}>
+        <div className="sp-split" style={{ alignItems: 'start' }}>
           {[
             { title: 'II. pilier — DSS', list: DSS_PROVIDERS },
             { title: 'III. pilier — DDS', list: DDS_PROVIDERS },
           ].map((group) => (
             <Panel key={group.title} padded label={group.title}>
-              <div className="hz-stack">
+              <div className="sp-stack">
                 {group.list.map((p) => (
                   <div
                     key={p.id}
-                    className="hz-row hz-row--between"
+                    className="sp-row sp-row--between"
                     style={{
                       borderBottom: '1px solid var(--border-hair)',
                       paddingBottom: 'var(--s-4)',
                     }}
                   >
                     <span style={{ fontSize: 'var(--fs-small)' }}>{p.company}</span>
-                    <span className="hz-num hz-small">{pct(p.managementFee, 2)} p. a.</span>
+                    <span className="sp-num sp-small">{pct(p.managementFee, 2)} p. a.</span>
                   </div>
                 ))}
               </div>
@@ -297,7 +297,7 @@ export function Data() {
       </section>
 
       {/* ── Mzdové pásma ─────────────────────────────────────────────────── */}
-      <section className="hz-section--tight">
+      <section className="sp-section--tight">
         <SectionHead
           label="Mzdové pásma"
           title="Odhad odvodu do II. piliera"
@@ -306,11 +306,11 @@ export function Data() {
             0,
           )} z hrubej mzdy. Pásma slúžia len na tento odhad a do ničoho iného nevstupujú.`}
         />
-        <div className="hz-kpis">
+        <div className="sp-kpis">
           {WAGE_BANDS.map((b) => (
-            <div className="hz-kpi" key={b.id}>
+            <div className="sp-kpi" key={b.id}>
               <Label>{b.label}</Label>
-              <span className="hz-kpi__v">
+              <span className="sp-kpi__v">
                 {eurSign(b.gross * PILLAR_2.contributionRate.value)}
                 <small>/ mes.</small>
               </span>

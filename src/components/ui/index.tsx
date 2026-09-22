@@ -26,7 +26,7 @@ export function Button({ variant = 'glass', size = 'md', className, ...rest }: B
   return (
     <button
       type="button"
-      className={cx('hz-btn', `hz-btn--${variant}`, size !== 'md' && `hz-btn--${size}`, className)}
+      className={cx('sp-btn', `sp-btn--${variant}`, size !== 'md' && `sp-btn--${size}`, className)}
       {...rest}
     />
   );
@@ -45,7 +45,7 @@ export function LinkButton({ href, variant = 'glass', size = 'md', children, onC
     <a
       href={href}
       onClick={onClick}
-      className={cx('hz-btn', `hz-btn--${variant}`, size !== 'md' && `hz-btn--${size}`)}
+      className={cx('sp-btn', `sp-btn--${variant}`, size !== 'md' && `sp-btn--${size}`)}
     >
       {children}
     </a>
@@ -55,11 +55,11 @@ export function LinkButton({ href, variant = 'glass', size = 'md', children, onC
 // ───────────────────────────────────────────────────────────────────────────
 
 export function Label({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cx('hz-label', className)}>{children}</span>;
+  return <span className={cx('sp-label', className)}>{children}</span>;
 }
 
 export function Num({ children, className }: { children: ReactNode; className?: string }) {
-  return <span className={cx('hz-num', className)}>{children}</span>;
+  return <span className={cx('sp-num', className)}>{children}</span>;
 }
 
 export function Badge({
@@ -69,7 +69,7 @@ export function Badge({
   children: ReactNode;
   tone?: 'pos' | 'warn' | 'neg' | 'info' | 'signal' | 'quiet';
 }) {
-  return <span className={`hz-badge hz-badge--${tone}`}>{children}</span>;
+  return <span className={`sp-badge sp-badge--${tone}`}>{children}</span>;
 }
 
 export function Note({
@@ -84,7 +84,7 @@ export function Note({
   style?: CSSProperties;
 }) {
   return (
-    <div className={cx('hz-note', `hz-note--${tone}`, className)} style={style}>
+    <div className={cx('sp-note', `sp-note--${tone}`, className)} style={style}>
       {children}
     </div>
   );
@@ -131,7 +131,7 @@ export function Panel({
     <section
       id={id}
       style={style}
-      className={cx('hz-panel', padded && 'hz-panel--pad', span && span > 1 && `span-${span}`, className)}
+      className={cx('sp-panel', padded && 'sp-panel--pad', span && span > 1 && `span-${span}`, className)}
       onClick={onClick}
       onKeyDown={onKeyDown}
       role={role}
@@ -141,12 +141,12 @@ export function Panel({
       {(label || title) && (
         <header style={{ display: 'grid', gap: 'var(--s-3)', marginBottom: 'var(--s-6)' }}>
           {label && <Label>{label}</Label>}
-          {title && <h3 className="hz-subhead" style={{ margin: 0 }}>{title}</h3>}
+          {title && <h3 className="sp-subhead" style={{ margin: 0 }}>{title}</h3>}
         </header>
       )}
       {children}
       {footnote && (
-        <p className="hz-micro" style={{ margin: 'var(--s-6) 0 0' }}>
+        <p className="sp-micro" style={{ margin: 'var(--s-6) 0 0' }}>
           {footnote}
         </p>
       )}
@@ -166,15 +166,15 @@ interface FieldProps {
 
 export function Field({ label, value, hint, children, htmlFor }: FieldProps) {
   return (
-    <div className="hz-field">
-      <div className="hz-field__top">
-        <label className="hz-field__label" htmlFor={htmlFor}>
+    <div className="sp-field">
+      <div className="sp-field__top">
+        <label className="sp-field__label" htmlFor={htmlFor}>
           {label}
         </label>
-        {value !== undefined && <output className="hz-field__value">{value}</output>}
+        {value !== undefined && <output className="sp-field__value">{value}</output>}
       </div>
       {children}
-      {hint && <p className="hz-field__hint" style={{ margin: 0 }}>{hint}</p>}
+      {hint && <p className="sp-field__hint" style={{ margin: 0 }}>{hint}</p>}
     </div>
   );
 }
@@ -191,7 +191,7 @@ export function Range({ min, max, value, onValueChange, style, ...rest }: RangeP
   return (
     <input
       type="range"
-      className="hz-range"
+      className="sp-range"
       min={min}
       max={max}
       value={value}
@@ -210,7 +210,7 @@ interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'onC
 export function Select({ options, onValueChange, className, ...rest }: SelectProps) {
   return (
     <select
-      className={cx('hz-select', className)}
+      className={cx('sp-select', className)}
       onChange={(e) => onValueChange(e.target.value)}
       {...rest}
     >
@@ -233,7 +233,7 @@ export function Switch({
   children: ReactNode;
 }) {
   return (
-    <label className="hz-switch">
+    <label className="sp-switch">
       <input
         type="checkbox"
         checked={checked}
@@ -258,7 +258,7 @@ export function Segmented<T extends string>({
   ariaLabel,
 }: SegmentedProps<T>) {
   return (
-    <div className="hz-seg" role="group" aria-label={ariaLabel}>
+    <div className="sp-seg" role="group" aria-label={ariaLabel}>
       {options.map((o) => (
         <button
           key={o.value}
@@ -291,9 +291,9 @@ export function Kpi({
   const color =
     tone === 'pos' ? 'var(--pos-1)' : tone === 'neg' ? 'var(--neg-1)' : tone === 'signal' ? 'var(--text-accent)' : undefined;
   return (
-    <div className="hz-kpi">
+    <div className="sp-kpi">
       <Label>{label}</Label>
-      <span className="hz-kpi__v" style={color ? { color } : undefined}>
+      <span className="sp-kpi__v" style={color ? { color } : undefined}>
         {value}
         {unit && <small>{unit}</small>}
       </span>
@@ -314,13 +314,13 @@ export function Meter({
 }) {
   const pctWidth = `${Math.round(Math.min(1, Math.max(0, value)) * 100)}%`;
   return (
-    <div className="hz-meter">
-      <div className="hz-meter__top">
+    <div className="sp-meter">
+      <div className="sp-meter__top">
         <span>{label}</span>
         <Num>{display ?? pctWidth}</Num>
       </div>
       <div
-        className="hz-meter__bar"
+        className="sp-meter__bar"
         role="meter"
         aria-valuenow={Math.round(value * 100)}
         aria-valuemin={0}
@@ -343,7 +343,7 @@ interface StepIndicatorProps {
 
 export function StepIndicator({ steps, current, completed, onSelect }: StepIndicatorProps) {
   return (
-    <nav className="hz-steps" aria-label="Kroky nástroja">
+    <nav className="sp-steps" aria-label="Kroky nástroja">
       {steps.map((s, i) => (
         <button
           key={s}
@@ -374,16 +374,16 @@ export function SectionHead({
   actions?: ReactNode;
 }) {
   return (
-    <div className="hz-split" style={{ marginBottom: 'var(--s-10)' }}>
+    <div className="sp-split" style={{ marginBottom: 'var(--s-10)' }}>
       <div>
         {label && <Label>{label}</Label>}
-        <h2 className="hz-title" style={{ margin: label ? 'var(--s-5) 0 0' : 0, maxWidth: '22ch' }}>
+        <h2 className="sp-title" style={{ margin: label ? 'var(--s-5) 0 0' : 0, maxWidth: '22ch' }}>
           {title}
         </h2>
       </div>
-      <div className="hz-stack">
-        {lead && <p className="hz-prose" style={{ margin: 0, lineHeight: 'var(--lh-body)' }}>{lead}</p>}
-        {actions && <div className="hz-row">{actions}</div>}
+      <div className="sp-stack">
+        {lead && <p className="sp-prose" style={{ margin: 0, lineHeight: 'var(--lh-body)' }}>{lead}</p>}
+        {actions && <div className="sp-row">{actions}</div>}
       </div>
     </div>
   );

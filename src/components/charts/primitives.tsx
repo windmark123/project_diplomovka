@@ -329,7 +329,7 @@ export interface LegendItem {
 
 export function Legend({ items }: { items: LegendItem[] }) {
   return (
-    <div className="hz-legend">
+    <div className="sp-legend">
       {items.map((it) => (
         <span key={it.label}>
           <i
@@ -370,7 +370,7 @@ export function ChartFrame({
       </div>
       {legend && <Legend items={legend} />}
       {caption && (
-        <figcaption className="hz-micro" style={{ margin: 0 }}>
+        <figcaption className="sp-micro" style={{ margin: 0 }}>
           {caption}
         </figcaption>
       )}

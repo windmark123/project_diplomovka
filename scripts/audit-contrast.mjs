@@ -98,8 +98,10 @@ const AUDIT = () => {
     const cs = getComputedStyle(el);
     const fg = parse(cs.fill).slice(0, 3);
     if (fg.length < 3) continue;
-    let p = el.closest('.hz-panel, .hz-slab, body');
-    const bg = bgOf(p || document.body);
+    // Pozadie sa hľadá priechodom cez predkov, nie podľa názvov tried.
+    // Zoznam tried by sa pri premenovaní rozišiel s kódom a skript by
+    // ticho hlásil svetlý podklad aj pod tmavou sekciou.
+    const bg = bgOf(el);
     const cr = ratio(fg, bg);
     const size = parseFloat(cs.fontSize) || 11;
     if (cr < 4.5) {

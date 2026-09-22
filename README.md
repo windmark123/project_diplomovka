@@ -1,7 +1,13 @@
-# Horizont
+# Štvrtý pilier
 
 Webová aplikácia k diplomovej práci **Návrh individuálneho investičného portfólia ako
 alternatívy a doplnku k existujúcim formám dôchodkového zabezpečenia v podmienkach SR**.
+
+Názov pomenúva, čo aplikácia navrhuje: vlastné portfólio ako štvrtý zdroj dôchodkového
+príjmu vedľa troch existujúcich pilierov. Značku tvoria štyri stĺpiky, z ktorých je
+štvrtý plný a v akcentnej farbe — ten, ktorý si sporiteľ postaví sám. Všetky sú rovnako
+vysoké zámerne; vyšší štvrtý by bol tvrdenie, a to je záver výpočtu, nie predpoklad
+značky.
 
 Nástroj určí rizikový profil sporiteľa podľa MiFID II, navrhne v jeho pásme tri variantné
 portfóliá z reálnych ETF, vyhodnotí ich rizikovo-výnosovými ukazovateľmi a Monte Carlo
@@ -173,7 +179,7 @@ chyby, ktoré sa pri vývoji vyskytli.
 
 ## Upozornenie
 
-Horizont neposkytuje investičné poradenstvo ani neponúka finančné produkty. Ide o
+Štvrtý pilier neposkytuje investičné poradenstvo ani neponúka finančné produkty. Ide o
 modelový výpočet na akademické účely. Historické výnosy nie sú prísľubom budúcich.
 
 ---

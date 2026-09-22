@@ -131,7 +131,7 @@ export function ValueWaterfall({ steps, height = 220, caption, accent = 'var(--c
         </svg>
       </div>
       {caption && (
-        <figcaption className="hz-micro" style={{ margin: 0 }}>
+        <figcaption className="sp-micro" style={{ margin: 0 }}>
           {caption}
         </figcaption>
       )}

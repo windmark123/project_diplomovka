@@ -106,8 +106,8 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
   const pillar2Contribution = band.gross * PILLAR_2.contributionRate.value;
 
   return (
-    <section className="hz-page hz-page--app hz-section--tight">
-      <div className="hz-row hz-row--between" style={{ marginBottom: 'var(--s-8)' }}>
+    <section className="sp-page sp-page--app sp-section--tight">
+      <div className="sp-row sp-row--between" style={{ marginBottom: 'var(--s-8)' }}>
         <div>
           <Label>
             Krok {step + 1} z {STEP_COUNT} · {isParamStep ? 'Parametre sporenia' : area!.full}
@@ -115,7 +115,7 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
           <h1
             ref={headingRef}
             tabIndex={-1}
-            className="hz-title"
+            className="sp-title"
             style={{ margin: 'var(--s-4) 0 0', maxWidth: '26ch', outline: 'none' }}
           >
             {isParamStep ? 'Parametre vášho sporenia' : area!.title}
@@ -136,17 +136,17 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
           gap: 'var(--s-7)',
           alignItems: 'start',
         }}
-        className="hz-tool-grid"
+        className="sp-tool-grid"
       >
         <Panel padded>
-          <p className="hz-lead" style={{ fontSize: 'var(--fs-body)', marginBottom: 'var(--s-9)' }}>
+          <p className="sp-lead" style={{ fontSize: 'var(--fs-body)', marginBottom: 'var(--s-9)' }}>
             {isParamStep
               ? 'Posledný krok. Tieto vstupy sa použijú rovnako pre vaše portfólio, II. aj III. pilier — porovnanie tak stojí na rovnakom základe.'
               : area!.lead}
           </p>
 
           {!isParamStep && (
-            <div className="hz-stack hz-stack--lg">
+            <div className="sp-stack sp-stack--lg">
               {stepQuestions.map((q) => (
                 <fieldset key={q.id} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
                   <legend
@@ -159,16 +159,16 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                     }}
                   >
                     <span
-                      className="hz-num"
+                      className="sp-num"
                       style={{ fontSize: 'var(--fs-micro)', color: 'var(--text-accent)' }}
                     >
                       {q.num}
                     </span>
-                    <span className="hz-subhead">{q.text}</span>
+                    <span className="sp-subhead">{q.text}</span>
                   </legend>
-                  <div className="hz-options">
+                  <div className="sp-options">
                     {q.options.map((o) => (
-                      <div className="hz-option" key={o.key}>
+                      <div className="sp-option" key={o.key}>
                         <input
                           type="radio"
                           id={`${q.id}-${o.key}`}
@@ -257,14 +257,14 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                 />
               </Field>
 
-              <div className="hz-stack" style={{ gridColumn: '1 / -1' }}>
+              <div className="sp-stack" style={{ gridColumn: '1 / -1' }}>
                 <Switch
                   checked={state.riskMatched}
                   onCheckedChange={(v) => set({ riskMatched: v })}
                 >
                   Porovnávať pri zhodnej miere rizika
                 </Switch>
-                <p className="hz-field__hint" style={{ margin: 0 }}>
+                <p className="sp-field__hint" style={{ margin: 0 }}>
                   Zapnuté: akciová zložka fondov v II. a III. pilieri sa nastaví na
                   priemernú rizikovú váhu vášho portfólia, takže rozdiel medzi cestami je
                   čistým rozdielom poplatkov a dane. Vypnuté: použije sa deklarované
@@ -277,7 +277,7 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                 >
                   Uplatniť daňovú úľavu na III. pilier
                 </Switch>
-                <p className="hz-field__hint" style={{ margin: 0 }}>
+                <p className="sp-field__hint" style={{ margin: 0 }}>
                   Príspevky do zákonného stropu znižujú základ dane. Model predpokladá,
                   že vrátenú sumu sporiteľ opäť vloží na účet.
                 </p>
@@ -286,14 +286,14 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
           )}
 
           <div
-            className="hz-row hz-row--between"
+            className="sp-row sp-row--between"
             style={{
               borderTop: '1px solid var(--border-hair)',
               paddingTop: 'var(--s-6)',
               marginTop: 'var(--s-9)',
             }}
           >
-            <div className="hz-row" style={{ gap: 'var(--s-3)' }}>
+            <div className="sp-row" style={{ gap: 'var(--s-3)' }}>
               <Button disabled={step === 0} onClick={() => set({ step: Math.max(0, step - 1) })}>
                 Späť
               </Button>
@@ -301,23 +301,23 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                 {isParamStep ? 'Zobraziť výsledky' : 'Ďalší krok'}
               </Button>
             </div>
-            <span className="hz-num hz-micro">
+            <span className="sp-num sp-micro">
               vyplnené {answered}/{QUESTIONS.length}
             </span>
           </div>
 
           {missing.length > 0 && (
-            <p className="hz-micro" style={{ marginTop: 'var(--s-5)', color: 'var(--neg-1)' }}>
+            <p className="sp-micro" style={{ marginTop: 'var(--s-5)', color: 'var(--neg-1)' }}>
               V tomto kroku ešte chýba {answersMissing(missing.length)}. Nezodpovedané otázky
               sa počítajú ako nulové skóre, takže profil bude nižší, než v skutočnosti je.
             </p>
           )}
         </Panel>
 
-        <Panel padded className="hz-tool-side">
+        <Panel padded className="sp-tool-side">
           <Label>Priebežný profil</Label>
           <h2
-            className="hz-title"
+            className="sp-title"
             style={{ margin: 'var(--s-4) 0 var(--s-6)', fontSize: 'var(--fs-head)' }}
           >
             {result.profile.name}
@@ -329,7 +329,7 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
             display={pctValue(result.score, 0)}
           />
 
-          <div className="hz-stack hz-stack--sm" style={{ marginTop: 'var(--s-6)' }}>
+          <div className="sp-stack sp-stack--sm" style={{ marginTop: 'var(--s-6)' }}>
             {result.areas.map((a) => {
               const weight = AREAS.find((x) => x.id === a.id)?.weight ?? 0;
               return (
@@ -338,7 +338,7 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                   label={
                     <span>
                       {a.name}
-                      <span className="hz-faint" style={{ marginLeft: 6 }}>
+                      <span className="sp-faint" style={{ marginLeft: 6 }}>
                         {a.answered < a.total
                           ? `${a.answered}/${a.total} otázok`
                           : weight > 0
@@ -356,36 +356,36 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
             })}
           </div>
 
-          <hr className="hz-divider" style={{ margin: 'var(--s-7) 0' }} />
+          <hr className="sp-divider" style={{ margin: 'var(--s-7) 0' }} />
 
-          <div className="hz-stack hz-stack--sm">
-            <div className="hz-row hz-row--between">
-              <span className="hz-micro">Pásmo rizikovej zložky</span>
-              <span className="hz-num hz-small">
+          <div className="sp-stack sp-stack--sm">
+            <div className="sp-row sp-row--between">
+              <span className="sp-micro">Pásmo rizikovej zložky</span>
+              <span className="sp-num sp-small">
                 {result.profile.equityBand[0]}–{result.profile.equityBand[1]} %
               </span>
             </div>
-            <div className="hz-row hz-row--between">
-              <span className="hz-micro">Orientačná konečná hodnota</span>
-              <span className="hz-num hz-small">{eurSign(preview.final)}</span>
+            <div className="sp-row sp-row--between">
+              <span className="sp-micro">Orientačná konečná hodnota</span>
+              <span className="sp-num sp-small">{eurSign(preview.final)}</span>
             </div>
-            <div className="hz-row hz-row--between">
-              <span className="hz-micro">Z toho vložené</span>
-              <span className="hz-num hz-small">{eurSign(preview.invested)}</span>
+            <div className="sp-row sp-row--between">
+              <span className="sp-micro">Z toho vložené</span>
+              <span className="sp-num sp-small">{eurSign(preview.invested)}</span>
             </div>
           </div>
 
           {(result.cappedByCapacity || result.cappedByHorizon) && (
             <Note tone="warn" style={{ marginTop: 'var(--s-6)' }}>
               {result.cappedByHorizon
-                ? `Horizont ${yearsLabel(
+                ? `Investičný horizont ${yearsLabel(
                     state.horizon,
                   )} je pre vyšší profil krátky — akciová zložka by nemala čas odpracovať prípadný pokles, preto model profil obmedzil.`
                 : 'Nízka finančná kapacita znížila profil o jeden stupeň. Schopnosť znášať stratu je tvrdé obmedzenie, nie ďalšia vážená položka.'}
             </Note>
           )}
 
-          <p className="hz-micro" style={{ marginTop: 'var(--s-6)' }}>
+          <p className="sp-micro" style={{ marginTop: 'var(--s-6)' }}>
             Orientačná hodnota počíta so stredom pásma a bez glide path. Presný výpočet
             vrátane simulácie nájdete vo výsledkoch. Inflácia {pct(MACRO.inflation.value, 1)} p. a.
           </p>

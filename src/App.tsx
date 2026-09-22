@@ -31,7 +31,7 @@ export function App() {
     <StoreProvider>
       <a
         href="#obsah"
-        className="hz-btn hz-btn--primary hz-btn--sm"
+        className="sp-btn sp-btn--primary sp-btn--sm"
         style={{ position: 'absolute', left: -9999, top: 8, zIndex: 100 }}
         onFocus={(e) => {
           e.currentTarget.style.left = '8px';

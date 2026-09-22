@@ -1,9 +1,9 @@
 {
-  "name": "horizont",
+  "name": "stvrty-pilier",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Horizont – nástroj na návrh individuálneho investičného portfólia ako doplnku k dôchodkovému zabezpečeniu v SR (diplomová práca)",
+  "description": "Štvrtý pilier – nástroj na návrh individuálneho investičného portfólia ako doplnku k dôchodkovému zabezpečeniu v SR (diplomová práca)",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

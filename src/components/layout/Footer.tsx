@@ -11,7 +11,7 @@ export function Footer({ navigate }: { navigate: (to: Route) => void }) {
         paddingBlock: 'var(--s-11) var(--s-9)',
       }}
     >
-      <div className="hz-page">
+      <div className="sp-page">
         <div
           style={{
             display: 'grid',
@@ -19,18 +19,18 @@ export function Footer({ navigate }: { navigate: (to: Route) => void }) {
             gap: 'var(--s-9)',
           }}
         >
-          <div className="hz-stack">
-            <span className="hz-label">O projekte</span>
-            <p className="hz-micro" style={{ margin: 0, maxWidth: '40ch' }}>
-              Horizont je výstupom diplomovej práce na tému návrhu individuálneho
+          <div className="sp-stack">
+            <span className="sp-label">O projekte</span>
+            <p className="sp-micro" style={{ margin: 0, maxWidth: '40ch' }}>
+              Štvrtý pilier je výstupom diplomovej práce na tému návrhu individuálneho
               investičného portfólia ako alternatívy a doplnku k existujúcim formám
               dôchodkového zabezpečenia v podmienkach Slovenskej republiky.
             </p>
           </div>
 
-          <div className="hz-stack">
-            <span className="hz-label">Rozsah modelu</span>
-            <p className="hz-micro" style={{ margin: 0, maxWidth: '40ch' }}>
+          <div className="sp-stack">
+            <span className="sp-label">Rozsah modelu</span>
+            <p className="sp-micro" style={{ margin: 0, maxWidth: '40ch' }}>
               Parametre tried aktív vychádzajú z obdobia {DATA_VINTAGE.period}, vyjadrené
               v {DATA_VINTAGE.currency}. Právne parametre boli overené{' '}
               {LEGAL_VINTAGE.verifiedOn}. Podrobný rozpis nájdete v{' '}
@@ -47,10 +47,10 @@ export function Footer({ navigate }: { navigate: (to: Route) => void }) {
             </p>
           </div>
 
-          <div className="hz-stack">
-            <span className="hz-label">Upozornenie</span>
-            <p className="hz-micro" style={{ margin: 0, maxWidth: '40ch' }}>
-              Horizont neposkytuje investičné poradenstvo ani neponúka finančné produkty.
+          <div className="sp-stack">
+            <span className="sp-label">Upozornenie</span>
+            <p className="sp-micro" style={{ margin: 0, maxWidth: '40ch' }}>
+              Štvrtý pilier neposkytuje investičné poradenstvo ani neponúka finančné produkty.
               Ide o modelový výpočet na akademické účely. Historické výnosy nie sú
               prísľubom budúcich. Všetky výpočty prebiehajú vo vašom prehliadači a žiadne
               údaje sa neodosielajú.

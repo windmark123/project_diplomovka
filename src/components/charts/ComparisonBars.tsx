@@ -65,7 +65,7 @@ export function ComparisonBars({ rows, format = eurSign, caption }: Props) {
                   />
                   {r.label}
                   {r.sublabel && (
-                    <span className="hz-faint" style={{ marginLeft: 8, fontWeight: 400 }}>
+                    <span className="sp-faint" style={{ marginLeft: 8, fontWeight: 400 }}>
                       {r.sublabel}
                     </span>
                   )}
@@ -120,7 +120,7 @@ export function ComparisonBars({ rows, format = eurSign, caption }: Props) {
         })}
       </div>
       {caption && (
-        <figcaption className="hz-micro" style={{ margin: 0 }}>
+        <figcaption className="sp-micro" style={{ margin: 0 }}>
           {caption}
         </figcaption>
       )}

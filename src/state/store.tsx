@@ -78,7 +78,15 @@ export const DEFAULT_STATE: AppState = {
   theme: 'day',
 };
 
-const STORAGE_KEY = 'horizont.state.v1';
+const STORAGE_KEY = 'stvrty-pilier.state.v1';
+
+/**
+ * Kľúč používaný pred premenovaním aplikácie.
+ *
+ * Číta sa len ako záloha, keď pod novým kľúčom nič nie je. Bez toho by
+ * sporiteľ, ktorý si dotazník vyplnil pred premenovaním, o odpovede prišiel.
+ */
+const LEGACY_STORAGE_KEY = 'horizont.state.v1';
 
 /** Polia, ktoré sa prenášajú v zdieľanom odkaze. Krok a téma do neho nepatria. */
 const SHARED_KEYS: Array<keyof AppState> = [
@@ -151,7 +159,8 @@ function loadInitial(): AppState {
   }
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw =
+      window.localStorage.getItem(STORAGE_KEY) ?? window.localStorage.getItem(LEGACY_STORAGE_KEY);
     if (raw) return merge(DEFAULT_STATE, JSON.parse(raw) as Partial<AppState>);
   } catch {
     // Nedostupné úložisko nie je dôvod, aby aplikácia nenaštartovala.
@@ -197,6 +206,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setState({ ...DEFAULT_STATE });
     try {
       window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
     } catch {
       // Ignorujeme — stav je aj tak prepísaný v pamäti.
     }
