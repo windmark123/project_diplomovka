@@ -1,0 +1,42 @@
+:root{
+/* ONE family for all prose and UI. Mono is used only for figures and eyebrow labels. */
+--font-display:"Outfit",system-ui,sans-serif;
+--font-body:"Outfit",system-ui,sans-serif;
+--font-mono:"IBM Plex Mono",ui-monospace,monospace;
+
+/* Deliberately wide contrast: a 10x span from label to hero, with a gap
+   between --fs-title and --fs-head so mid sizes never crowd each other. */
+--fs-hero:clamp(48px,8.4vw,132px); /* @kind font */
+--fs-display:clamp(36px,5.2vw,80px); /* @kind font */
+--fs-title:clamp(27px,3.1vw,48px); /* @kind font */
+--fs-head:26px; /* @kind font */
+--fs-subhead:19px; /* @kind font */
+--fs-lead:21px; /* @kind font */
+--fs-body:16px; /* @kind font */
+--fs-small:14px; /* @kind font */
+--fs-micro:12.5px; /* @kind font */
+--fs-label:11px; /* @kind font */
+--fs-figure:clamp(34px,4vw,58px); /* @kind font */
+
+--lh-tight:.98; /* @kind font */
+--lh-snug:1.1; /* @kind font */
+--lh-head:1.22; /* @kind font */
+--lh-body:1.62; /* @kind font */
+--lh-loose:1.75; /* @kind font */
+
+--ls-hero:-.042em; /* @kind font */
+--ls-display:-.034em; /* @kind font */
+--ls-title:-.024em; /* @kind font */
+--ls-body:-.005em; /* @kind font */
+--ls-label:.14em; /* @kind font */
+--ls-mono:.02em; /* @kind font */
+
+--fw-light:300; /* @kind font */
+--fw-regular:400; /* @kind font */
+--fw-medium:500; /* @kind font */
+--fw-semibold:600; /* @kind font */
+--fw-bold:700; /* @kind font */
+
+--measure-prose:66ch; /* @kind spacing */
+--measure-lead:44ch; /* @kind spacing */
+}

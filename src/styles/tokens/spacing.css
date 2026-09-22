@@ -1,0 +1,14 @@
+:root{
+--s-0:0; /* @kind spacing */
+--s-1:2px;--s-2:4px;--s-3:8px;--s-4:12px;--s-5:16px;--s-6:20px;
+--s-7:24px;--s-8:32px;--s-9:40px;--s-10:48px;--s-11:64px;--s-12:80px;
+--s-13:104px;--s-14:136px;--s-15:180px;
+
+--gutter:24px; /* @kind spacing */
+--page-pad:clamp(20px,5vw,72px); /* @kind spacing */
+--container-wide:1440px;--container:1160px;--container-text:720px;
+--section-y:clamp(64px,9vw,136px); /* @kind spacing */
+--control-h-sm:32px; /* @kind spacing */
+--control-h:44px; /* @kind spacing */
+--control-h-lg:54px; /* @kind spacing */
+}

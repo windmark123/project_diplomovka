@@ -1,0 +1,24 @@
+:root{
+--r-0:0; /* @kind radius */
+--r-xs:3px;--r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:24px;--r-2xl:32px;--r-pill:999px;
+--bw-hair:1px; /* @kind spacing */
+--bw-line:1.5px; /* @kind spacing */
+--bw-strong:2px; /* @kind spacing */
+
+--shadow-none:none;
+--shadow-hair:0 1px 0 rgba(11,13,16,.04);
+--shadow-sm:0 1px 2px rgba(11,13,16,.05),0 2px 8px rgba(11,13,16,.04);
+--shadow-md:0 2px 4px rgba(11,13,16,.04),0 12px 28px -8px rgba(11,13,16,.12);
+--shadow-lg:0 8px 20px -6px rgba(11,13,16,.10),0 32px 64px -24px rgba(11,13,16,.22);
+--shadow-signal:0 10px 30px -10px rgba(228,87,46,.42);
+
+/* glass elevation: soft ambient drop + the inner edge highlight */
+--shadow-glass:0 1px 1px rgba(11,13,16,.04),0 10px 30px -12px rgba(11,13,16,.16);
+--shadow-glass-lg:0 2px 2px rgba(11,13,16,.04),0 28px 70px -24px rgba(11,13,16,.26);
+
+--inset-hair:inset 0 0 0 1px var(--border-hair);
+--blur-veil:var(--glass-blur); /* @kind other */
+--veil:var(--glass-fill-strong);
+--protect-top:linear-gradient(to bottom,rgba(11,13,16,.55),rgba(11,13,16,0)); /* @kind color */
+--protect-bottom:linear-gradient(to top,rgba(11,13,16,.72),rgba(11,13,16,0)); /* @kind color */
+}

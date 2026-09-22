@@ -1,0 +1,15 @@
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-page);color:var(--text-body);font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--text-strong);font-weight:var(--fw-medium);letter-spacing:var(--ls-title);line-height:var(--lh-head);margin:0}
+a{color:var(--text-strong);text-decoration:none;text-underline-offset:3px;text-decoration-thickness:1px;border-bottom:1px solid var(--border-line);transition:var(--t-hover)}
+a:hover{color:var(--text-signal);border-color:var(--signal-1)}
+:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px;border-radius:var(--r-xs)}
+.hz-num{font-family:var(--font-mono);font-variant-numeric:tabular-nums;letter-spacing:var(--ls-mono)}
+.hz-label{font-family:var(--font-mono);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--text-muted)}
+.hz-field{background:var(--field)}
+/* Liquid glass: translucent fill + blur + inner edge highlight + sheen overlay */
+.hz-glass{position:relative;background:var(--glass-fill);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-stroke);border-radius:var(--r-xl);box-shadow:var(--shadow-glass),var(--glass-edge);overflow:hidden}
+.hz-glass::before{content:"";position:absolute;inset:0;pointer-events:none;background:var(--glass-sheen);opacity:.9}
+.hz-glass>*{position:relative}
+.hz-reveal{opacity:0;transform:translateY(18px);transition:var(--t-reveal)}
+.hz-reveal.is-in{opacity:1;transform:none}

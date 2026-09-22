@@ -1,0 +1,61 @@
+:root{
+/* --- base ink (cool, near-neutral) ---------------------------------- */
+--ink-1:#0B0D10;--ink-2:#181B20;--ink-3:#3A4048;--ink-4:#6B737E;--ink-5:#9AA2AD;
+
+/* --- surface scale: soft cool greys, no cream ----------------------- */
+--paper-1:#F4F5F7;--paper-2:#EBEDF1;--paper-3:#DFE2E8;--paper-4:#CCD1DA;
+--white:#FFFFFF;
+
+/* --- signal (brand accent) ------------------------------------------ */
+--signal-1:#E4572E;--signal-2:#C7431F;--signal-3:#F2916F;--signal-4:#FCE7DF;
+
+/* --- comparison series: the three retirement routes ------------------ */
+--route-2p:#1F4E46;--route-2p-soft:#D8E4E1;
+--route-3p:#B08B1E;--route-3p-soft:#F0E7CC;
+--route-own:#E4572E;--route-own-soft:#FCE7DF;
+
+/* --- semantic ------------------------------------------------------- */
+--pos-1:#1C6B48;--pos-soft:#DBEBE2;
+--warn-1:#9C6A17;--warn-soft:#F4E9D2;
+--neg-1:#A32A18;--neg-soft:#F6DFDA;
+--info-1:#223D4D;--info-soft:#DDE5EA;
+
+/* --- glass (liquid-glass system) ------------------------------------ */
+--glass-fill:rgba(255,255,255,.58);
+--glass-fill-strong:rgba(255,255,255,.74);
+--glass-fill-dim:rgba(255,255,255,.34);
+--glass-fill-ink:rgba(11,13,16,.52);
+--glass-stroke:rgba(255,255,255,.72);
+--glass-stroke-ink:rgba(255,255,255,.14);
+--glass-edge:inset 0 1px 0 rgba(255,255,255,.85),inset 0 -1px 0 rgba(11,13,16,.05); /* @kind shadow */
+--glass-edge-ink:inset 0 1px 0 rgba(255,255,255,.16); /* @kind shadow */
+--glass-blur:saturate(180%) blur(22px); /* @kind other */
+--glass-blur-heavy:saturate(190%) blur(38px); /* @kind other */
+--glass-sheen:linear-gradient(150deg,rgba(255,255,255,.62),rgba(255,255,255,.06) 46%,rgba(255,255,255,0) 70%); /* @kind color */
+--glass-tint:radial-gradient(120% 140% at 12% 0%,rgba(228,87,46,.10),transparent 58%),radial-gradient(110% 130% at 92% 8%,rgba(31,78,70,.12),transparent 60%);
+
+/* --- ambient field behind glass ------------------------------------- */
+--field:radial-gradient(85% 70% at 8% -6%,#E3E7EE,transparent 62%),radial-gradient(70% 62% at 96% 4%,#EFE4DF,transparent 58%),radial-gradient(90% 80% at 50% 108%,#E6EAEF,transparent 60%),#F4F5F7; /* @kind color */
+--field-ink:radial-gradient(80% 70% at 10% -4%,#1A1F26,transparent 60%),radial-gradient(66% 60% at 94% 6%,#231A17,transparent 56%),#0B0D10; /* @kind color */
+
+/* --- semantic aliases ----------------------------------------------- */
+--text-strong:var(--ink-1);--text-body:var(--ink-2);--text-muted:var(--ink-4);
+--text-faint:var(--ink-5);--text-invert:var(--white);--text-signal:var(--signal-2);
+--surface-page:var(--paper-1);--surface-card:var(--white);--surface-sunken:var(--paper-2);
+--surface-raised:var(--white);--surface-invert:var(--ink-1);--surface-signal:var(--signal-1);
+--surface-glass:var(--glass-fill);
+--border-hair:#E3E6EB;--border-line:#CFD4DC;--border-strong:var(--ink-1);
+--focus-ring:var(--signal-1);
+--overlay:rgba(11,13,16,.46);
+}
+:root[data-theme="night"]{
+--surface-page:var(--ink-1);--surface-card:#15181D;--surface-sunken:#111418;
+--surface-raised:#1B1F25;--surface-invert:var(--white);
+--surface-glass:var(--glass-fill-ink);
+--text-strong:#F4F5F7;--text-body:#DFE2E8;--text-muted:var(--ink-5);
+--text-faint:var(--ink-4);--text-invert:var(--ink-1);--text-signal:var(--signal-3);
+--border-hair:#23272E;--border-line:#31363F;--border-strong:var(--paper-3);
+--glass-fill:var(--glass-fill-ink);--glass-stroke:var(--glass-stroke-ink);
+--glass-edge:var(--glass-edge-ink); /* @kind shadow */
+--field:var(--field-ink); /* @kind color */
+}
