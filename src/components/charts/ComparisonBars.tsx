@@ -108,8 +108,8 @@ export function ComparisonBars({ rows, format = eurSign, caption }: Props) {
                       bottom: 0,
                       left: 0,
                       width: `calc(${investedPct}% - 2px)`,
-                      background: 'var(--ink-1)',
-                      opacity: 0.22,
+                      background: 'var(--text-strong)',
+                      opacity: 0.2,
                       borderRadius: '2px 0 0 2px',
                     }}
                   />

@@ -46,11 +46,17 @@ function formatParam(p: LegalParam<number>): string {
   return pct(p.value, 2);
 }
 
-/** Farba pozadia bunky korelačnej matice — jedna škála od nuly po jednotku. */
-const correlationTint = (v: number): string => {
-  const alpha = Math.min(0.85, Math.max(0, v) * 0.8);
-  return `rgba(228, 87, 46, ${alpha.toFixed(3)})`;
-};
+/**
+ * Krytie akcentovej vrstvy v bunke korelačnej matice.
+ *
+ * Strop 0,45 nie je estetický, ale funkčný. Bunka je priesvitná vrstva nad
+ * podkladom karty, takže výsledná farba závisí od témy. Pri tomto krytí
+ * zostáva `--text-strong` čitateľný nad oboma podkladmi — nad bielou kartou
+ * vznikne svetlá broskyňová, nad tmavou tmavohnedá — a hodnota sa nemusí
+ * prepínať medzi čiernym a bielym písmom podľa odhadovaného jasu.
+ */
+const correlationTint = (v: number): string =>
+  `color-mix(in srgb, var(--accent) ${(Math.max(0, Math.min(1, v)) * 45).toFixed(1)}%, transparent)`;
 
 export function Data() {
   const needsVerification = LEGAL_ROWS.filter((p) => p.verify).length;
@@ -208,8 +214,7 @@ export function Data() {
                         className="num"
                         style={{
                           background: correlationTint(CORRELATION[i][j]),
-                          color:
-                            CORRELATION[i][j] > 0.55 ? 'var(--white)' : 'var(--text-strong)',
+                          color: 'var(--text-strong)',
                         }}
                       >
                         {ratio(CORRELATION[i][j])}

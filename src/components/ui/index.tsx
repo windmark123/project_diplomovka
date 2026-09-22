@@ -272,7 +272,7 @@ export function Kpi({
   tone?: 'pos' | 'neg' | 'signal';
 }) {
   const color =
-    tone === 'pos' ? 'var(--pos-1)' : tone === 'neg' ? 'var(--neg-1)' : tone === 'signal' ? 'var(--signal-2)' : undefined;
+    tone === 'pos' ? 'var(--pos-1)' : tone === 'neg' ? 'var(--neg-1)' : tone === 'signal' ? 'var(--text-accent)' : undefined;
   return (
     <div className="hz-kpi">
       <Label>{label}</Label>

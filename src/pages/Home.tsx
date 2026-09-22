@@ -78,7 +78,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       <section className="hz-page" style={{ paddingBlock: 'var(--s-13) var(--s-11)' }}>
         <div style={{ overflow: 'hidden' }}>
           <Label className="hz-label--exact">
-            <span style={{ color: 'var(--signal-2)' }}>
+            <span style={{ color: 'var(--text-accent)' }}>
               MiFID II · II. a III. pilier · {ASSET_CLASSES.length} tried aktív
             </span>
           </Label>
@@ -91,7 +91,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
           <span className="hz-mask">
             <span
               className="hz-display"
-              style={{ color: 'var(--ink-3)', animationDelay: '110ms' }}
+              style={{ color: 'var(--text-muted)', animationDelay: '110ms' }}
             >
               bez dohadov.
             </span>
@@ -137,7 +137,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
               style={{ alignItems: 'baseline', gap: 'var(--s-4)', marginBottom: 'var(--s-7)' }}
             >
               <span className="hz-figure">{eurShort(comparison.ownVsPillar3)}</span>
-              <span className="hz-subhead" style={{ color: 'var(--ink-3)' }}>
+              <span className="hz-subhead" style={{ color: 'var(--text-muted)' }}>
                 € navyše oproti III. pilieru
               </span>
             </div>
@@ -269,7 +269,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
               <Label>Nosné zistenie</Label>
               <h2
                 className="hz-display"
-                style={{ margin: 'var(--s-5) 0 0', maxWidth: '18ch', color: 'var(--white)' }}
+                style={{ margin: 'var(--s-5) 0 0', maxWidth: '18ch', color: 'var(--paper-1)' }}
               >
                 Jedno percento ročne stojí {pct((cheapest - atDdsFee) / cheapest, 0)} úspor.
               </h2>
@@ -280,7 +280,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
 
               <div className="hz-row" style={{ gap: 'var(--s-9)', marginTop: 'var(--s-9)' }}>
                 <span style={{ display: 'block' }}>
-                  <span className="hz-figure" style={{ color: 'var(--signal-3)' }}>
+                  <span className="hz-figure" style={{ color: 'var(--accent)' }}>
                     −{eurShort(cheapest - atDdsFee)}
                   </span>
                   <Label>
@@ -353,7 +353,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
                   className="hz-num"
                   style={{
                     fontSize: 'var(--fs-head)',
-                    color: 'var(--signal-2)',
+                    color: 'var(--text-accent)',
                     fontWeight: 500,
                   }}
                 >
@@ -404,8 +404,8 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
         <Panel padded={false}>
           <div
             style={{
-              background: 'var(--signal-1)',
-              color: 'var(--white)',
+              background: 'var(--accent-fill)',
+              color: 'var(--on-accent)',
               padding: 'clamp(28px, 5vw, 56px)',
               display: 'grid',
               gap: 'var(--s-7)',
@@ -413,7 +413,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
           >
             <h2
               className="hz-title"
-              style={{ margin: 0, color: 'var(--white)', maxWidth: '20ch' }}
+              style={{ margin: 0, color: 'var(--on-accent)', maxWidth: '20ch' }}
             >
               Rozhodnutie o štyridsiatich rokoch si zaslúži čísla.
             </h2>

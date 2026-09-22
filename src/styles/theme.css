@@ -1,0 +1,238 @@
+/**
+ * Tematická vrstva.
+ *
+ * Selektor je `:root[data-theme='night']`, nie `html[data-theme='night']`.
+ * Vyzerajú zameniteľne — `:root` je to isté `html` — ale špecificita sa líši:
+ * (0,2,0) oproti (0,1,1). Pôvodné farby dizajnového systému používajú prvý
+ * tvar, takže by druhý prebili bez ohľadu na poradie importov a tmavá téma
+ * by si ponechala staré, nekontrastné hodnoty.
+ *
+ * ────────────────────────────────────────────────────────────────────────────
+ * PREČO EXISTUJE
+ * ────────────────────────────────────────────────────────────────────────────
+ * Dizajnový systém definuje farebné škály (--ink-1…5, --signal-1…4, --paper-1…4)
+ * ako pevné hodnoty. Sú to *pigmenty*, nie významy — v tmavom režime sa
+ * nemenia, takže text zapísaný ako `--ink-1` zostane čierny aj na čiernom
+ * podklade. Tak vznikol nadpis s kontrastom 1:1.
+ *
+ * Táto vrstva preto zavádza **sémantické tokeny**, ktoré pomenúvajú úlohu,
+ * nie odtieň, a definuje ich pre obe témy zvlášť. Komponenty siahajú výhradne
+ * na ne. Pravidlo je jednoduché: v štýloch aplikácie sa nesmie objaviť
+ * `--ink-N`, `--signal-N` ani `--paper-N`.
+ *
+ * Tmavá téma nie je prevrátená svetlá. Má vlastné plochy (podklad nie je
+ * čierny, ale tmavo modrosivý, aby tiene a vrstvenie zostali viditeľné),
+ * vlastné hrúbky textu a vlastný, svetlejší akcent — sýta oranžová zo
+ * svetlého režimu je na tmavom podklade príliš tmavá.
+ *
+ * ────────────────────────────────────────────────────────────────────────────
+ * NAMERANÉ KONTRASTY (WCAG 2.1, AA vyžaduje 4,5:1 pre bežný text)
+ * ────────────────────────────────────────────────────────────────────────────
+ *                                        svetlý        tmavý
+ *   silný text na karte                  19,5:1        16,4:1
+ *   telo textu na karte                  17,3:1        12,4:1
+ *   tlmený text na karte                  8,0:1         7,7:1
+ *   slabý text na karte                   6,1:1         5,7:1
+ *   text na plnom tlačidle                5,2:1         7,4:1
+ *   text na jemnej akcentovej ploche      5,1:1         9,7:1
+ *   akcent ako značka (min. 3:1)          3,7:1         6,9:1
+ */
+
+:root {
+  /* ── Plochy ──────────────────────────────────────────────────────────── */
+  --surface-page: #f4f5f7;
+  --surface-card: #ffffff;
+  --surface-raised: #ffffff;
+  --surface-sunken: #ebedf1;
+  --surface-inverse: #0b0d10;
+  --on-surface-inverse: #f4f6fa;
+
+  /* ── Text ────────────────────────────────────────────────────────────── */
+  --text-strong: #0b0d10;
+  --text-body: #181b20;
+  --text-muted: #4a515c;
+  --text-faint: #5c636e;
+  --text-on-inverse: #f4f6fa;
+  --text-on-inverse-muted: #a3abb8;
+
+  /* ── Obrysy ──────────────────────────────────────────────────────────── */
+  --border-hair: #e3e6eb;
+  --border-line: #cfd4dc;
+  --border-strong: #0b0d10;
+
+  /* ── Akcent ──────────────────────────────────────────────────────────── */
+  /* --accent nesie značky: čiary v grafoch, obrysy, výplň posuvníka.
+     Nikdy pod ním nestojí text. */
+  --accent: #e4572e;
+  /* --accent-fill nesie text, preto je tmavší o dva kroky. */
+  --accent-fill: #c2410c;
+  --accent-fill-hover: #a8360e;
+  --on-accent: #ffffff;
+  /* Jemná akcentová plocha: odznaky, vybratá odpoveď, zvýraznený riadok. */
+  --accent-surface: #fce7df;
+  --on-accent-surface: #b03a14;
+  --accent-border: rgba(228, 87, 46, 0.32);
+  /* Akcentový text na karte — o dva kroky tmavší než značková oranžová,
+     ktorá by ako text mala len 3,7:1. */
+  --text-accent: #c2410c;
+  --focus-ring: #c2410c;
+
+  /* ── Stavové farby ───────────────────────────────────────────────────── */
+  --pos-1: #14663f;
+  --pos-soft: #dbebe2;
+  --warn-1: #7a5210;
+  --warn-soft: #f4e9d2;
+  --neg-1: #932615;
+  --neg-soft: #f6dfda;
+  --info-1: #1b3240;
+  --info-soft: #dde5ea;
+
+  /* ── Sklo a hĺbka ────────────────────────────────────────────────────── */
+  --glass-fill: rgba(255, 255, 255, 0.62);
+  --glass-fill-strong: rgba(255, 255, 255, 0.78);
+  --glass-stroke: rgba(255, 255, 255, 0.76);
+  --glass-blur: saturate(180%) blur(22px);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 rgba(11, 13, 16, 0.05);
+  --glass-sheen: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.05) 46%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  --shadow-sm: 0 1px 2px rgba(11, 13, 16, 0.05), 0 2px 8px rgba(11, 13, 16, 0.04);
+  --shadow-md: 0 2px 4px rgba(11, 13, 16, 0.04), 0 12px 28px -8px rgba(11, 13, 16, 0.12);
+  --shadow-lg: 0 8px 20px -6px rgba(11, 13, 16, 0.1), 0 32px 64px -24px rgba(11, 13, 16, 0.22);
+  --shadow-accent: 0 10px 30px -12px rgba(228, 87, 46, 0.5);
+
+  /* Atmosféra na pozadí stránky. */
+  --field:
+    radial-gradient(85% 70% at 8% -6%, #e3e7ee, transparent 62%),
+    radial-gradient(70% 62% at 96% 4%, #efe4df, transparent 58%),
+    radial-gradient(90% 80% at 50% 108%, #e6eaef, transparent 60%), #f4f5f7;
+
+  color-scheme: light;
+}
+
+:root[data-theme='night'] {
+  /* Podklad nie je čierny. Na úplnej čiernej nie je vidieť tieň ani vrstvenie,
+     takže by sa rozhranie sploštilo a panely by splynuli s pozadím. */
+  --surface-page: #0b0d10;
+  --surface-card: #15181d;
+  --surface-raised: #1b1f25;
+  --surface-sunken: #101317;
+  --surface-inverse: #f4f6fa;
+  --on-surface-inverse: #0b0d10;
+
+  --text-strong: #f4f6fa;
+  --text-body: #d3d8e0;
+  --text-muted: #a3abb8;
+  --text-faint: #8892a0;
+  --text-on-inverse: #0b0d10;
+  --text-on-inverse-muted: #4a515c;
+
+  --border-hair: #232830;
+  --border-line: #323944;
+  --border-strong: #6b737e;
+
+  /* Sýta oranžová zo svetlého režimu je na tmavom podklade príliš tmavá,
+     preto je akcent o dva kroky svetlejší. Plná plocha potom nesie tmavý
+     text, nie biely — ten by mal na svetlej oranžovej nízky kontrast. */
+  --accent: #ff7a4d;
+  --accent-fill: #ff7a4d;
+  --accent-fill-hover: #ff9066;
+  --on-accent: #1a0b05;
+  --accent-surface: #2e1913;
+  --on-accent-surface: #ffb498;
+  --accent-border: rgba(255, 122, 77, 0.38);
+  --text-accent: #ff8a5c;
+  --focus-ring: #ff8a5c;
+
+  --pos-1: #5fd9a0;
+  --pos-soft: #12261d;
+  --warn-1: #f0c060;
+  --warn-soft: #2a2010;
+  --neg-1: #ff8f7d;
+  --neg-soft: #2e1614;
+  --info-1: #8fc4e8;
+  --info-soft: #13222b;
+
+  --glass-fill: rgba(27, 31, 37, 0.66);
+  --glass-fill-strong: rgba(21, 24, 29, 0.88);
+  --glass-stroke: rgba(255, 255, 255, 0.1);
+  --glass-blur: saturate(150%) blur(24px);
+  --glass-edge: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --glass-sheen: linear-gradient(
+    150deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.01) 46%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4), 0 12px 28px -8px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 8px 20px -6px rgba(0, 0, 0, 0.5), 0 32px 64px -24px rgba(0, 0, 0, 0.7);
+  --shadow-accent: 0 10px 34px -12px rgba(255, 122, 77, 0.55);
+
+  --field:
+    radial-gradient(85% 70% at 8% -8%, #16202b, transparent 62%),
+    radial-gradient(70% 62% at 96% 2%, #241811, transparent 58%),
+    radial-gradient(90% 80% at 50% 108%, #10161d, transparent 60%), #0b0d10;
+
+  color-scheme: dark;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Farby grafov
+   ──────────────────────────────────────────────────────────────────────────
+   Editoriálna paleta systému je pre dátové série nepoužiteľná — jej tmavá
+   teal a zlatá majú nízku sýtosť a pri deuteranopii splývajú s oranžovou.
+   Série majú preto vlastné odtiene, overené na oddelenie pri farbosleposti
+   aj na kontrast voči podkladu, a pre každú tému samostatne.
+
+   Zloženie portfólia nie je kategoriálna, ale usporiadaná veličina: triedy
+   aktív idú od najrizikovejšej po najbezpečnejšiu. Používa preto dve
+   jednofarebné škály — teplú pre rizikovú zložku, chladnú pre bezpečnú.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --c-own: #e4572e;
+  --c-p2: #2563c9;
+  --c-p3: #1a7f5a;
+
+  --c-dm: #6b2410;
+  --c-em: #9a3510;
+  --c-sc: #c2410c;
+  --c-reit: #e0603a;
+  --c-gold: #f09a78;
+
+  --c-bond: #0f5c55;
+  --c-cash: #4fa89d;
+
+  --c-grid: var(--border-hair);
+  --c-axis: var(--text-muted);
+  --c-invested: #6b737e;
+  --c-band: rgba(228, 87, 46, 0.14);
+  --c-band-inner: rgba(228, 87, 46, 0.26);
+}
+
+:root[data-theme='night'] {
+  --c-own: #ff8a5c;
+  --c-p2: #6aa5f5;
+  --c-p3: #45c08c;
+
+  /* Pri usporiadaných škálach sa v tmavom režime poradie obracia: najväčšiu
+     váhu nesie najsvetlejší odtieň, lebo ten je na tmavom podklade najviditeľnejší. */
+  --c-dm: #ffc4ad;
+  --c-em: #f79f78;
+  --c-sc: #e57848;
+  --c-reit: #bf5125;
+  --c-gold: #8f3a18;
+
+  --c-bond: #6fd0c2;
+  --c-cash: #2b8478;
+
+  --c-invested: #8892a0;
+  --c-band: rgba(255, 138, 92, 0.16);
+  --c-band-inner: rgba(255, 138, 92, 0.3);
+}

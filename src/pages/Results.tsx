@@ -314,7 +314,7 @@ export function Results({ navigate }: { navigate: (to: Route) => void }) {
                 key={v.definition.id}
                 span={2}
                 className={active ? 'is-active' : undefined}
-                style={active ? { borderColor: 'var(--signal-1)', borderWidth: 2 } : undefined}
+                style={active ? { borderColor: 'var(--accent)', borderWidth: 2 } : undefined}
               >
                 <div className="hz-row hz-row--between" style={{ marginBottom: 'var(--s-5)' }}>
                   <Label>{v.definition.method}</Label>

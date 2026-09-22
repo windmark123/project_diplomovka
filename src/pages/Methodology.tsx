@@ -55,7 +55,7 @@ function Step({
       <div className="hz-row" style={{ alignItems: 'baseline', gap: 'var(--s-5)' }}>
         <span
           className="hz-num"
-          style={{ fontSize: 'var(--fs-head)', color: 'var(--signal-2)', fontWeight: 500 }}
+          style={{ fontSize: 'var(--fs-head)', color: 'var(--text-accent)', fontWeight: 500 }}
         >
           {n}
         </span>

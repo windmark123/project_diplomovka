@@ -23,9 +23,9 @@ export function Nav({ route, navigate }: Props) {
           }}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="10" cy="10" r="9" fill="none" stroke="var(--signal-1)" strokeWidth="1.5" />
-            <path d="M1.6 12.5h16.8" stroke="var(--ink-1)" strokeWidth="1.5" />
-            <circle cx="10" cy="6" r="2.4" fill="var(--signal-1)" />
+            <circle cx="10" cy="10" r="9" fill="none" stroke="var(--accent)" strokeWidth="1.5" />
+            <path d="M1.6 12.5h16.8" stroke="var(--text-strong)" strokeWidth="1.5" />
+            <circle cx="10" cy="6" r="2.4" fill="var(--accent)" />
           </svg>
           Horizont
         </a>

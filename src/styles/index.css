@@ -1,115 +1,15 @@
 @import './fonts.css';
 @import './tokens/colors.css';
+@import './theme.css';
 @import './tokens/typography.css';
 @import './tokens/spacing.css';
 @import './tokens/shape.css';
 @import './tokens/motion.css';
 @import './tokens/base.css';
 
-/* ──────────────────────────────────────────────────────────────────────────
-   Korekcie dizajnového systému
-   ────────────────────────────────────────────────────────────────────────── */
-
-/* Komponenty DS používajú --text-faint a --text-muted pre poznámky pod čiarou,
-   jednotky a eyebrow popisky. Pri 11–12,5 px vychádzal kontrast pod hranicu
-   4,5:1, ktorú si práca stanovila kvôli čitateľnosti na projektore. */
-:root {
-  --text-faint: #3a4048;
-  --text-muted: #2b3138;
-  --route-own: var(--signal-1);
-}
-
-:root[data-theme='night'] {
-  --text-faint: #9aa2ad;
-  --text-muted: #c2c9d2;
-
-  /* Tmavá téma dizajnového systému prekrýva --glass-fill, nie však jeho
-     silnejší a slabší variant. Bez tohto doplnenia by lepkavá navigácia
-     a tlačidlá typu „glass“ zostali biele na tmavej stránke. */
-  --glass-fill-strong: rgba(21, 24, 29, 0.86);
-  --glass-fill-dim: rgba(11, 13, 16, 0.4);
-
-  /* Biely lesk cez tmavé panely pridáva sivý závoj — na tmavom podklade
-     stačí jeho zlomok. */
-  --glass-sheen: linear-gradient(
-    150deg,
-    rgba(255, 255, 255, 0.07),
-    rgba(255, 255, 255, 0.01) 46%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  --glass-tint: radial-gradient(120% 140% at 12% 0%, rgba(228, 87, 46, 0.08), transparent 58%);
-}
-
-/* ──────────────────────────────────────────────────────────────────────────
-   Farby grafov
-   ──────────────────────────────────────────────────────────────────────────
-   Editoriálna paleta dizajnového systému je pre dátové série nepoužiteľná —
-   jej tmavá teal a zlatá majú príliš nízku sýtosť a pri deuteranopii splývajú
-   s oranžovou. Série preto dostali vlastné odtiene, overené na oddelenie pri
-   farbosleposti aj na kontrast voči podkladu. Signálna oranžová zostáva
-   vlastnému portfóliu, teda návrhu, o ktorom práca pojednáva.
-
-   Zloženie portfólia nie je kategoriálna, ale usporiadaná veličina: triedy
-   aktív idú od najrizikovejšej po najbezpečnejšiu. Používa preto dve
-   jednofarebné škály — teplú pre rizikovú zložku, chladnú pre bezpečnú.
-   Teplé verzus chladné oddelenie číta okamžite aj bez legendy. */
-
-:root {
-  /* Kategoriálne — tri porovnávané cesty */
-  --c-own: #e4572e;
-  --c-p2: #2563c9;
-  --c-p3: #1a7f5a;
-
-  /* Usporiadaná škála: riziková zložka, od najväčšej váhy po najmenšiu */
-  --c-dm: #6b2410;
-  --c-em: #9a3510;
-  --c-sc: #c2410c;
-  --c-reit: #e0603a;
-  --c-gold: #f09a78;
-
-  /* Usporiadaná škála: bezpečná zložka */
-  --c-bond: #0f5c55;
-  --c-cash: #4fa89d;
-
-  /* Prvky grafu */
-  --c-grid: var(--border-hair);
-  --c-axis: var(--text-faint);
-  --c-invested: var(--ink-4);
-  --c-band: rgba(228, 87, 46, 0.14);
-  --c-band-inner: rgba(228, 87, 46, 0.24);
-}
-
-/* Tmavý režim má vlastné kroky z tých istých škál, nie prevrátené svetlé.
-   Pri usporiadaných škálach sa poradie obracia: na tmavom podklade nesie
-   najväčšiu váhu najsvetlejší, nie najtmavší odtieň. */
-:root[data-theme='night'] {
-  --c-own: #e06a42;
-  --c-p2: #4e8ad8;
-  --c-p3: #279c72;
-
-  --c-dm: #f8b99f;
-  --c-em: #ee8a60;
-  --c-sc: #db5a2e;
-  --c-reit: #b8420f;
-  --c-gold: #8f3210;
-
-  --c-bond: #5fbdb0;
-  --c-cash: #1e7a70;
-
-  --c-invested: var(--ink-5);
-  --c-band: rgba(224, 106, 66, 0.16);
-  --c-band-inner: rgba(224, 106, 66, 0.28);
-}
-
-/* Podklad koreňového elementu presakuje nad a pod plochu stránky (napríklad
-   pri pružnom rolovaní), preto musí sledovať tému rovnako ako telo. */
 html {
-  background: var(--paper-1);
+  background: var(--surface-page);
   scroll-behavior: smooth;
-}
-
-html[data-theme='night'] {
-  background: var(--ink-1);
 }
 
 body {
@@ -213,7 +113,7 @@ body {
   line-height: var(--lh-tight);
   letter-spacing: var(--ls-hero);
   font-weight: var(--fw-medium);
-  color: var(--ink-1);
+  color: var(--text-strong);
   margin: 0;
 }
 
@@ -321,7 +221,10 @@ body {
    kde by adresné pravidlo na triedu nezabralo a popisky by zostali tmavé
    na tmavom podklade. */
 .hz-slab {
-  background: var(--field-ink);
+  background:
+    radial-gradient(120% 90% at 82% 0%, rgba(228, 87, 46, 0.18), transparent 58%),
+    radial-gradient(90% 80% at 8% 100%, rgba(37, 99, 201, 0.14), transparent 60%),
+    var(--field-ink);
   color: var(--paper-1);
 
   --text-strong: var(--white);
@@ -348,6 +251,16 @@ body {
 }
 .hz-slab .hz-panel::before { opacity: 0.25; }
 
+/* V tmavom režime je tmavá už celá stránka, takže by sekcia splynula
+   s okolím. Odlíši ju vlastný obrys a silnejšie akcentové presvetlenie. */
+html[data-theme='night'] .hz-slab {
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(120% 90% at 82% 0%, rgba(255, 122, 77, 0.16), transparent 60%),
+    radial-gradient(90% 80% at 10% 100%, rgba(37, 99, 201, 0.12), transparent 62%),
+    #101319;
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
    Štítky a odznaky
    ────────────────────────────────────────────────────────────────────────── */
@@ -367,7 +280,7 @@ body {
 .hz-badge--warn { background: var(--warn-soft); color: var(--warn-1); }
 .hz-badge--neg { background: var(--neg-soft); color: var(--neg-1); }
 .hz-badge--info { background: var(--info-soft); color: var(--info-1); }
-.hz-badge--signal { background: var(--signal-4); color: var(--signal-2); }
+.hz-badge--signal { background: var(--accent-surface); color: var(--on-accent-surface); }
 .hz-badge--quiet { background: var(--surface-sunken); color: var(--text-muted); border-color: var(--border-hair); }
 
 .hz-note {
@@ -377,9 +290,9 @@ body {
   line-height: 1.55;
   border: 1px solid transparent;
 }
-.hz-note--warn { background: var(--warn-soft); color: var(--ink-2); border-color: rgba(156, 106, 23, 0.25); }
-.hz-note--info { background: var(--info-soft); color: var(--ink-2); border-color: rgba(34, 61, 77, 0.2); }
-.hz-note--signal { background: var(--signal-4); color: var(--ink-2); border-color: rgba(228, 87, 46, 0.24); }
+.hz-note--warn { background: var(--warn-soft); color: var(--text-body); border-color: color-mix(in srgb, var(--warn-1) 34%, transparent); }
+.hz-note--info { background: var(--info-soft); color: var(--text-body); border-color: color-mix(in srgb, var(--info-1) 30%, transparent); }
+.hz-note--signal { background: var(--accent-surface); color: var(--text-body); border-color: var(--accent-border); }
 
 /* ──────────────────────────────────────────────────────────────────────────
    Ovládacie prvky
@@ -407,11 +320,11 @@ body {
 .hz-btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .hz-btn:disabled:active { transform: none; }
 
-.hz-btn--signal { background: var(--signal-1); color: var(--white); box-shadow: var(--shadow-signal); }
-.hz-btn--signal:hover:not(:disabled) { background: var(--signal-2); color: var(--white); }
+.hz-btn--signal { background: var(--accent-fill); color: var(--on-accent); box-shadow: var(--shadow-accent); }
+.hz-btn--signal:hover:not(:disabled) { background: var(--accent-fill-hover); color: var(--on-accent); }
 
-.hz-btn--primary { background: var(--ink-1); color: var(--white); }
-.hz-btn--primary:hover:not(:disabled) { background: var(--ink-2); color: var(--white); }
+.hz-btn--primary { background: var(--surface-inverse); color: var(--on-surface-inverse); }
+.hz-btn--primary:hover:not(:disabled) { background: var(--surface-inverse); opacity: 0.88; color: var(--on-surface-inverse); }
 
 .hz-btn--glass {
   background: var(--glass-fill-strong);
@@ -420,7 +333,7 @@ body {
   border-color: var(--border-line);
   color: var(--text-strong);
 }
-.hz-btn--glass:hover:not(:disabled) { border-color: var(--ink-3); color: var(--text-strong); }
+.hz-btn--glass:hover:not(:disabled) { border-color: var(--border-strong); color: var(--text-strong); }
 
 .hz-btn--quiet { background: transparent; color: var(--text-body); border-color: var(--border-line); }
 .hz-btn--quiet:hover:not(:disabled) { background: var(--surface-sunken); color: var(--text-strong); }
@@ -440,7 +353,7 @@ body {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   font-size: var(--fs-small);
-  color: var(--text-signal);
+  color: var(--text-accent);
   font-weight: var(--fw-medium);
   white-space: nowrap;
 }
@@ -454,7 +367,7 @@ input[type='range'].hz-range {
   border-radius: var(--r-pill);
   background: linear-gradient(
     to right,
-    var(--signal-1) 0 var(--fill, 50%),
+    var(--accent) 0 var(--fill, 50%),
     var(--border-line) var(--fill, 50%) 100%
   );
   outline-offset: 6px;
@@ -465,8 +378,8 @@ input[type='range'].hz-range::-webkit-slider-thumb {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--white);
-  border: 3px solid var(--signal-1);
+  background: var(--surface-card);
+  border: 3px solid var(--accent);
   box-shadow: var(--shadow-sm);
   cursor: grab;
 }
@@ -474,8 +387,8 @@ input[type='range'].hz-range::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--white);
-  border: 3px solid var(--signal-1);
+  background: var(--surface-card);
+  border: 3px solid var(--accent);
   cursor: grab;
 }
 
@@ -522,11 +435,11 @@ input[type='range'].hz-range::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--surface-card);
   box-shadow: var(--shadow-sm);
   transition: transform var(--d-fast) var(--ease-out);
 }
-.hz-switch input:checked { background: var(--signal-1); }
+.hz-switch input:checked { background: var(--accent); }
 .hz-switch input:checked::after { transform: translateX(18px); }
 
 .hz-seg {
@@ -591,9 +504,9 @@ input[type='range'].hz-range::-moz-range-thumb {
   background: var(--surface-card);
   transition: all var(--d-fast) var(--ease-out);
 }
-.hz-option label:hover { border-color: var(--signal-3); }
-.hz-option input:checked + label { border-color: var(--signal-1); background: var(--signal-4); }
-.hz-option input:checked + label::before { border: 5px solid var(--signal-1); }
+.hz-option label:hover { border-color: var(--accent); }
+.hz-option input:checked + label { border-color: var(--accent); background: var(--accent-surface); color: var(--on-accent-surface); }
+.hz-option input:checked + label::before { border: 5px solid var(--accent); background: var(--surface-card); }
 .hz-option input:focus-visible + label { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -633,7 +546,7 @@ input[type='range'].hz-range::-moz-range-thumb {
   white-space: nowrap;
 }
 .hz-table th.num { text-align: right; }
-.hz-table tr.is-highlight td { background: var(--signal-4); }
+.hz-table tr.is-highlight td { background: var(--accent-surface); color: var(--on-accent-surface); }
 :root[data-theme='night'] .hz-table tr.is-highlight td { background: rgba(228, 87, 46, 0.12); }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -709,7 +622,7 @@ input[type='range'].hz-range::-moz-range-thumb {
   transition: var(--t-hover);
 }
 .hz-nav__links a:hover { background: var(--surface-sunken); color: var(--text-strong); }
-.hz-nav__links a[aria-current='page'] { background: var(--signal-4); color: var(--signal-2); }
+.hz-nav__links a[aria-current='page'] { background: var(--accent-surface); color: var(--on-accent-surface); }
 
 .hz-icon-btn {
   flex: none;
@@ -724,7 +637,7 @@ input[type='range'].hz-range::-moz-range-thumb {
   cursor: pointer;
   transition: var(--t-hover);
 }
-.hz-icon-btn:hover { border-color: var(--ink-3); color: var(--text-strong); }
+.hz-icon-btn:hover { border-color: var(--border-strong); color: var(--text-strong); }
 
 @media (max-width: 900px) {
   .hz-nav__links a.is-optional { display: none; }
@@ -780,9 +693,9 @@ input[type='range'].hz-range::-moz-range-thumb {
   color: var(--text-muted);
   flex: none;
 }
-.hz-steps button.is-done i { background: var(--pos-1); color: var(--white); }
-.hz-steps button[aria-current='step'] { background: var(--signal-4); color: var(--signal-2); }
-.hz-steps button[aria-current='step'] i { background: var(--signal-1); color: var(--white); }
+.hz-steps button.is-done i { background: var(--pos-soft); color: var(--pos-1); }
+.hz-steps button[aria-current='step'] { background: var(--accent-surface); color: var(--on-accent-surface); }
+.hz-steps button[aria-current='step'] i { background: var(--accent-fill); color: var(--on-accent); }
 
 /* Meradlo oblastí dotazníka */
 .hz-meter { display: grid; gap: var(--s-2); font-size: var(--fs-small); }
@@ -792,7 +705,7 @@ input[type='range'].hz-range::-moz-range-thumb {
   display: block;
   height: 100%;
   border-radius: var(--r-pill);
-  background: var(--signal-1);
+  background: var(--accent);
   transition: width var(--d-slow) var(--ease-entrance);
 }
 

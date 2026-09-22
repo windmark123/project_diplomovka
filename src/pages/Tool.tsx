@@ -124,7 +124,7 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
                   >
                     <span
                       className="hz-num"
-                      style={{ fontSize: 'var(--fs-micro)', color: 'var(--signal-2)' }}
+                      style={{ fontSize: 'var(--fs-micro)', color: 'var(--text-accent)' }}
                     >
                       {q.num}
                     </span>
