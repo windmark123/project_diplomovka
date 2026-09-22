@@ -6,7 +6,7 @@
  * a nemusí čakať na koniec.
  */
 
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 
 import { AREAS, QUESTIONS, questionsForArea } from '@/data/questionnaire';
 import { MACRO, PILLAR_2, WAGE_BANDS, wageBand } from '@/data/pillars';
@@ -25,6 +25,7 @@ import {
   StepIndicator,
   Switch,
 } from '@/components/ui';
+import { usePrefersReducedMotion } from '@/components/motion';
 import { useStore } from '@/state/store';
 import type { Route } from '@/state/router';
 
@@ -43,6 +44,36 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
 
   const stepQuestions = area ? questionsForArea(area.id) : [];
   const missing = stepQuestions.filter((q) => !state.answers[q.id]);
+
+  /**
+   * Po prepnutí kroku sa pohľad vráti na začiatok dotazníka.
+   *
+   * Bez toho zostal používateľ po kliknutí na „Ďalší krok" v mieste, kde
+   * predtým rolovaním skončil — teda uprostred alebo na konci nových otázok —
+   * a nadpis kroku ani prvú otázku vôbec nevidel.
+   *
+   * Zároveň sa presunie zameranie na nadpis, aby o zmene vedeli aj čítačky
+   * obrazovky a klávesnica pokračovala na správnom mieste. Zameranie by samo
+   * osebe pohľad posunulo skokom, preto sa posun potlačí a vykoná sa zvlášť,
+   * plynule — alebo okamžite, ak si používateľ vyžiadal obmedzenie pohybu.
+   */
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const isFirstRender = useRef(true);
+  const reducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const el = headingRef.current;
+    if (!el) return;
+
+    el.focus({ preventScroll: true });
+    // Lepkavá navigácia je vysoká 62 px; bez odsadenia by nadpis skončil pod ňou.
+    const top = el.getBoundingClientRect().top + window.scrollY - 86;
+    window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion ? 'auto' : 'smooth' });
+  }, [step, reducedMotion]);
 
   const completed = useMemo(
     () =>
@@ -81,7 +112,12 @@ export function Tool({ navigate }: { navigate: (to: Route) => void }) {
           <Label>
             Krok {step + 1} z {STEP_COUNT} · {isParamStep ? 'Parametre sporenia' : area!.full}
           </Label>
-          <h1 className="hz-title" style={{ margin: 'var(--s-4) 0 0', maxWidth: '26ch' }}>
+          <h1
+            ref={headingRef}
+            tabIndex={-1}
+            className="hz-title"
+            style={{ margin: 'var(--s-4) 0 0', maxWidth: '26ch', outline: 'none' }}
+          >
             {isParamStep ? 'Parametre vášho sporenia' : area!.title}
           </h1>
         </div>
