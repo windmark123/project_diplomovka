@@ -32,6 +32,9 @@ export function eurShort(v: number): string {
   return money0.format(Math.round(v));
 }
 
+/** Skrátená suma so znakom meny: 156 400 → „156 tis. €“. */
+export const eurShortSign = (v: number): string => `${eurShort(v)}${NBSP}€`;
+
 /** Percento z podielu: 0,0425 → „4,3 %“. */
 export const pct = (v: number, digits = 1): string =>
   `${nf(digits, digits).format(v * 100)}${NBSP}%`;

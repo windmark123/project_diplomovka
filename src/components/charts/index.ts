@@ -6,3 +6,4 @@ export * from './AllocationRing';
 export * from './ComparisonBars';
 export * from './RiskReturnScatter';
 export * from './FeeImpactChart';
+export * from './ValueWaterfall';

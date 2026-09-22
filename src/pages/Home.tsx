@@ -29,6 +29,7 @@ import {
   ROUTE_COLOR,
 } from '@/components/charts';
 import { Button, Kpi, Label, Note, Panel, SectionHead } from '@/components/ui';
+import { AnimatedNumber, Reveal } from '@/components/motion';
 import type { Route } from '@/state/router';
 
 /** Modelový prípad, na ktorom stojí celá úvodná stránka. */
@@ -136,7 +137,12 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
               className="hz-row"
               style={{ alignItems: 'baseline', gap: 'var(--s-4)', marginBottom: 'var(--s-7)' }}
             >
-              <span className="hz-figure">{eurShort(comparison.ownVsPillar3)}</span>
+              <AnimatedNumber
+                className="hz-figure"
+                value={comparison.ownVsPillar3}
+                format={eurShort}
+                duration={1500}
+              />
               <span className="hz-subhead" style={{ color: 'var(--text-muted)' }}>
                 € navyše oproti III. pilieru
               </span>
@@ -186,7 +192,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
       </section>
 
       {/* ── Výstupy ──────────────────────────────────────────────────────── */}
-      <section className="hz-page hz-section" id="vystupy">
+      <Reveal as="section" className="hz-page hz-section" id="vystupy">
         <SectionHead
           label="Výstupy práce"
           title="Čo model počíta a čo z toho vyplýva"
@@ -259,10 +265,10 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             </p>
           </Panel>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Poplatky ─────────────────────────────────────────────────────── */}
-      <section className="hz-slab hz-section" style={{ marginTop: 'var(--section-y)' }}>
+      <Reveal as="section" className="hz-slab hz-section" style={{ marginTop: 'var(--section-y)' }}>
         <div className="hz-page">
           <div className="hz-split" style={{ alignItems: 'center' }}>
             <div>
@@ -319,10 +325,10 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             </Panel>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Postup ───────────────────────────────────────────────────────── */}
-      <section className="hz-page hz-section">
+      <Reveal as="section" className="hz-page hz-section">
         <SectionHead
           label="Postup"
           title="Tri kroky od dotazníka po porovnanie"
@@ -367,10 +373,10 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             </Panel>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Hranice modelu ───────────────────────────────────────────────── */}
-      <section className="hz-page hz-section--tight">
+      <Reveal as="section" className="hz-page hz-section--tight">
         <div className="hz-split">
           <div>
             <Label>Hranice</Label>
@@ -397,10 +403,10 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             </Note>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Záverečná výzva ──────────────────────────────────────────────── */}
-      <section className="hz-page">
+      <Reveal as="section" className="hz-page">
         <Panel padded={false}>
           <div
             style={{
@@ -457,7 +463,7 @@ export function Home({ navigate }: { navigate: (to: Route) => void }) {
             )} z hrubej mzdy, nie z vlastného vkladu.`}
           />
         </div>
-      </section>
+      </Reveal>
     </>
   );
 }

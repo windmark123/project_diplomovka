@@ -221,7 +221,8 @@ body {
    kde by adresné pravidlo na triedu nezabralo a popisky by zostali tmavé
    na tmavom podklade. */
 .hz-slab {
-  background:
+  background-color: #0b0d10;
+  background-image:
     radial-gradient(120% 90% at 82% 0%, rgba(228, 87, 46, 0.18), transparent 58%),
     radial-gradient(90% 80% at 8% 100%, rgba(37, 99, 201, 0.14), transparent 60%),
     var(--field-ink);
@@ -255,10 +256,10 @@ body {
    s okolím. Odlíši ju vlastný obrys a silnejšie akcentové presvetlenie. */
 html[data-theme='night'] .hz-slab {
   border-block: 1px solid rgba(255, 255, 255, 0.08);
-  background:
+  background-color: #101319;
+  background-image:
     radial-gradient(120% 90% at 82% 0%, rgba(255, 122, 77, 0.16), transparent 60%),
-    radial-gradient(90% 80% at 10% 100%, rgba(37, 99, 201, 0.12), transparent 62%),
-    #101319;
+    radial-gradient(90% 80% at 10% 100%, rgba(37, 99, 201, 0.12), transparent 62%);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -799,4 +800,349 @@ input[type='range'].hz-range::-moz-range-thumb {
 .hz-label--exact {
   text-transform: none;
   letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   POHYB A HĹBKA
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Odkrývanie pri rolovaní. Posun je malý a tlmenie dlhé — výrazný pohyb
+   by pri dlhej stránke s číslami rušil viac, než by pomohol. */
+.hz-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 900ms var(--ease-entrance),
+    transform 900ms var(--ease-entrance);
+  transition-delay: calc(var(--reveal-index, 0) * 70ms);
+}
+.hz-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Panel, ktorý sa dá stlačiť, na to musí vyzerať. */
+.hz-panel--interactive {
+  cursor: pointer;
+  transition:
+    transform 420ms var(--ease-out),
+    box-shadow 420ms var(--ease-out),
+    border-color 260ms var(--ease-out);
+}
+.hz-panel--interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), var(--glass-edge);
+}
+.hz-panel--interactive:active {
+  transform: translateY(-1px) scale(0.997);
+}
+
+.hz-panel--selected {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-lg), var(--shadow-accent), var(--glass-edge);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   VERDIKT — hlavný moment stránky výsledkov
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hz-verdict {
+  position: relative;
+  overflow: clip;
+  border-radius: var(--r-2xl);
+  padding: clamp(32px, 5vw, 64px);
+  color: var(--paper-1);
+  /* Pevná farba pod prechodmi. Prechod bez podkladovej farby je len obrázok —
+     ak sa nevykreslí, text zostane na priesvitnom pozadí, a nástroje na
+     kontrolu kontrastu ho nevedia započítať. */
+  background-color: #0d1218;
+  background-image:
+    radial-gradient(90% 120% at 88% -10%, rgba(228, 87, 46, 0.42), transparent 58%),
+    radial-gradient(70% 100% at 6% 108%, rgba(37, 99, 201, 0.32), transparent 60%),
+    linear-gradient(168deg, #16202b 0%, #0d1218 62%, #0b0d10 100%);
+  box-shadow: var(--shadow-lg);
+  isolation: isolate;
+
+  --text-strong: #ffffff;
+  --text-body: #dfe3ea;
+  --text-muted: #b3bcc8;
+  --text-faint: #98a2b0;
+  --surface-card: rgba(255, 255, 255, 0.07);
+  --surface-sunken: rgba(255, 255, 255, 0.08);
+  --border-hair: rgba(255, 255, 255, 0.14);
+  --border-line: rgba(255, 255, 255, 0.24);
+  /* Odznaky vnútri verdiktu musia sedieť na tmavom podklade, inak ostanú
+     svetlosivé na svetlosivom. */
+  --accent-surface: rgba(255, 122, 77, 0.2);
+  --on-accent-surface: #ffc2a8;
+}
+
+:root[data-theme='night'] .hz-verdict {
+  background-color: #11161d;
+  background-image:
+    radial-gradient(90% 120% at 88% -10%, rgba(255, 122, 77, 0.32), transparent 58%),
+    radial-gradient(70% 100% at 6% 108%, rgba(37, 99, 201, 0.24), transparent 60%),
+    linear-gradient(168deg, #1a2430 0%, #11161d 62%, #0d1014 100%);
+}
+
+/* Jemná textúra cez prechod — bez nej pôsobí veľká plocha plocho
+   a na slabších paneloch sa objaví pruhovanie. */
+.hz-verdict::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 4px 4px;
+}
+
+.hz-verdict__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+}
+@media (max-width: 940px) {
+  .hz-verdict__grid { grid-template-columns: 1fr; }
+}
+
+.hz-verdict__name {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6.4vw, 5rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.04em;
+  line-height: 0.96;
+  color: #fff;
+  margin: 0;
+}
+
+.hz-verdict__figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.045em;
+  line-height: 1;
+  color: #fff;
+  display: block;
+  /* Oddeľovač tisícov je pevná medzera. V neproporcionálnom písme má šírku
+     celého znaku, takže pri 70 px rozdelí číslo na dva zdanlivo nesúvisiace
+     kusy. Zúženie ho vráti na optickú medzeru. */
+  word-spacing: -0.3em;
+}
+
+.hz-verdict__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.hz-verdict__stat {
+  background: rgba(13, 18, 24, 0.55);
+  backdrop-filter: blur(8px);
+  padding: var(--s-6);
+  display: grid;
+  gap: var(--s-2);
+}
+.hz-verdict__stat-v,
+.hz-verdict__stat b {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  font-weight: var(--fw-medium);
+  color: #fff;
+  letter-spacing: -0.03em;
+  word-spacing: -0.2em;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LEPKAVÁ LIŠTA S KONTEXTOM
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hz-context {
+  position: sticky;
+  top: 62px;
+  z-index: 30;
+  margin-block: var(--s-7);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-6);
+  padding: var(--s-3) var(--s-5);
+  border-radius: var(--r-pill);
+  background: var(--glass-fill-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-hair);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-micro);
+}
+.hz-context dl {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin: 0;
+}
+.hz-context dt {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+.hz-context dd {
+  margin: 0;
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 720px) {
+  .hz-context { position: static; border-radius: var(--r-lg); }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ZÁLOŽKY S PRECHODOM OBSAHU
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hz-tabs {
+  display: inline-flex;
+  gap: var(--s-2);
+  padding: 5px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--r-pill);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.hz-tabs::-webkit-scrollbar { display: none; }
+.hz-tabs button {
+  flex: none;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  padding: 9px 18px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--t-hover);
+}
+.hz-tabs button:hover { color: var(--text-strong); }
+.hz-tabs button[aria-selected='true'] {
+  background: var(--surface-card);
+  color: var(--text-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Obsah záložky sa pri prepnutí prilinie zospodu, aby bola zmena čitateľná. */
+.hz-tabpanel {
+  animation: hz-tab-in 520ms var(--ease-entrance) both;
+}
+@keyframes hz-tab-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hz-tabpanel { animation: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   VEĽKÉ ČÍSLA
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hz-metric {
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+}
+.hz-metric__v {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  font-weight: var(--fw-medium);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text-strong);
+}
+.hz-metric__v small {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
+  margin-left: 5px;
+  letter-spacing: 0;
+}
+.hz-metric p { margin: 0; font-size: var(--fs-micro); color: var(--text-muted); line-height: 1.45; }
+.hz-metric--pos .hz-metric__v { color: var(--pos-1); }
+.hz-metric--neg .hz-metric__v { color: var(--neg-1); }
+.hz-metric--accent .hz-metric__v { color: var(--text-accent); }
+
+/* Tri varianty patria do troch rovnakých stĺpcov. V štvorstĺpcovej mriežke
+   s rozpätím dva by sa zalomili na 2 + 1 a vpravo by zostala diera. */
+.hz-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-5);
+  align-items: stretch;
+}
+.hz-rail > * { display: grid; min-width: 0; }
+
+@media (max-width: 1080px) {
+  .hz-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .hz-rail { grid-template-columns: 1fr; }
+}
+
+/* Karta variantu.
+   Riadky mriežky sú pevné, aby tri karty vedľa seba mali nadpisy, prstence
+   aj ukazovatele v rovnakej výške. Bez toho ich rozhodí rôzna dĺžka popisu
+   a karty pôsobia ako tri nesúvisiace bloky, nie ako porovnanie. */
+.hz-variant {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 0;
+}
+.hz-variant__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 3.2em;
+  margin-bottom: var(--s-4);
+}
+.hz-variant__desc {
+  margin: 0 0 var(--s-6);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* V úzkej karte sa štyri ukazovatele musia zmestiť do dvoch stĺpcov;
+   inak sa naskladajú pod seba a karta narastie na dvojnásobok. */
+.hz-variant .hz-kpis {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: var(--s-6);
+}
+.hz-variant .hz-kpi {
+  padding: var(--s-5);
 }

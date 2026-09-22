@@ -8,6 +8,7 @@
 import { useMemo } from 'react';
 
 import { eurShort, eurSign } from '@/engine/format';
+import { useDrawIn } from '@/components/motion';
 import {
   AxisX,
   ChartFrame,
@@ -116,22 +117,9 @@ export function ProjectionChart({ series, years, height = 300, caption, endLabel
           />
         )}
 
-        {series.map((s) => {
-          const pts = s.values.map((v, i) => ({ x: x(i), y: y(v) }));
-          return (
-            <path
-              key={s.id}
-              d={linePath(pts)}
-              fill="none"
-              stroke={s.color}
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray={s.dashed ? '5 5' : undefined}
-              opacity={s.secondary ? 0.75 : 1}
-            />
-          );
-        })}
+        {series.map((s) => (
+          <SeriesLine key={s.id} series={s} x={x} y={y} />
+        ))}
 
         {hover !== null &&
           series.map((s) => (
@@ -166,5 +154,38 @@ export function ProjectionChart({ series, years, height = 300, caption, endLabel
       </svg>
       <Tooltip state={tooltip} width={width} />
     </ChartFrame>
+  );
+}
+
+
+/**
+ * Jeden priebeh. Je to samostatný komponent preto, že kreslenie pri prvom
+ * zobrazení potrebuje vlastný odkaz na element — a ten sa nedá vytvoriť
+ * v tele cyklu bez porušenia pravidiel hookov.
+ */
+function SeriesLine({
+  series,
+  x,
+  y,
+}: {
+  series: ProjectionSeries;
+  x: (v: number) => number;
+  y: (v: number) => number;
+}) {
+  // Pomocné série sa nekreslia — vložená suma je referencia, nie príbeh.
+  const { ref } = useDrawIn(!series.dashed);
+  const pts = series.values.map((v, i) => ({ x: x(i), y: y(v) }));
+  return (
+    <path
+      ref={ref}
+      d={linePath(pts)}
+      fill="none"
+      stroke={series.color}
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeDasharray={series.dashed ? '5 5' : undefined}
+      opacity={series.secondary ? 0.75 : 1}
+    />
   );
 }

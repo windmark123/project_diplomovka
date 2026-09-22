@@ -3,6 +3,7 @@
 import type {
   ButtonHTMLAttributes,
   CSSProperties,
+  KeyboardEventHandler,
   InputHTMLAttributes,
   ReactNode,
   SelectHTMLAttributes,
@@ -102,6 +103,12 @@ interface PanelProps {
   padded?: boolean;
   id?: string;
   style?: CSSProperties;
+  /** Panel, ktorý je sám ovládacím prvkom (napr. voľba variantu). */
+  onClick?: () => void;
+  onKeyDown?: KeyboardEventHandler<HTMLElement>;
+  role?: string;
+  tabIndex?: number;
+  ariaPressed?: boolean;
 }
 
 export function Panel({
@@ -114,12 +121,22 @@ export function Panel({
   padded = true,
   id,
   style,
+  onClick,
+  onKeyDown,
+  role,
+  tabIndex,
+  ariaPressed,
 }: PanelProps) {
   return (
     <section
       id={id}
       style={style}
       className={cx('hz-panel', padded && 'hz-panel--pad', span && span > 1 && `span-${span}`, className)}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      role={role}
+      tabIndex={tabIndex}
+      aria-pressed={ariaPressed}
     >
       {(label || title) && (
         <header style={{ display: 'grid', gap: 'var(--s-3)', marginBottom: 'var(--s-6)' }}>
